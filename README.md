@@ -6,7 +6,7 @@ A ready-to-use Claude Code configuration for Salesforce teams. Drop the `.claude
 
 ## What This Gives You
 
-Seven specialized **Skills** that activate automatically based on what you're working on:
+Fourteen specialized **Skills** that activate automatically based on what you're working on:
 
 | Skill | What it does |
 |---|---|
@@ -17,6 +17,13 @@ Seven specialized **Skills** that activate automatically based on what you're wo
 | `custom-field` | Creates Custom Field metadata with strict validation (Roll-Up Summary, formulas, etc.) |
 | `list-view` | Generates List View metadata with filters, columns, and visibility |
 | `flow` | Builds Salesforce Flows via a 3-step MCP pipeline (Screen, Record-Triggered, Scheduled) |
+| `custom-tab` | Creates Custom Tab metadata (object, web, Visualforce tabs) |
+| `custom-application` | Creates Lightning App metadata with navigation, branding, and action overrides |
+| `flexipage` | Generates Lightning pages (RecordPage, AppPage, HomePage) via CLI bootstrapping |
+| `permission-set` | Generates Permission Set metadata with object, field, and user permissions |
+| `validation-rule` | Creates Validation Rule metadata with formula enforcement and error messages |
+| `report` | Designs and generates Salesforce Report metadata (Tabular, Summary, Matrix, Joined) |
+| `dashboard` | Designs and generates Salesforce Dashboard metadata with charts, metrics, and gauges |
 
 Each skill includes **code templates**, **real-world references**, and **hard-coded guardrails** — so Claude doesn't just generate code, it generates *correct* Salesforce code.
 
@@ -73,7 +80,14 @@ your-sf-project/
 │       ├── custom-object/
 │       ├── custom-field/
 │       ├── list-view/
-│       └── flow/
+│       ├── flow/
+│       ├── custom-tab/
+│       ├── custom-application/
+│       ├── flexipage/
+│       ├── permission-set/
+│       ├── validation-rule/
+│       ├── report/
+│       └── dashboard/
 ├── force-app/
 ├── sfdx-project.json
 └── ...
@@ -105,6 +119,13 @@ Examples that trigger each skill:
 | "Add a Roll-Up Summary field for total contract value" | `custom-field` |
 | "Create a list view showing open cases assigned to me" | `list-view` |
 | "Build a flow that sends an email when an Opportunity closes" | `flow` |
+| "Create a tab for the Project Request object" | `custom-tab` |
+| "Set up a Lightning app for the project management team" | `custom-application` |
+| "Generate a record page for the Project Request object" | `flexipage` |
+| "Create a permission set for read access to invoices" | `permission-set` |
+| "Add a validation rule to require Description when Status is Approved" | `validation-rule` |
+| "Create a Summary report showing open opportunities by stage" | `report` |
+| "Build a sales pipeline dashboard with KPI metrics and charts" | `dashboard` |
 
 ---
 
@@ -317,6 +338,193 @@ Leads as stale if they haven't been updated in 30 days.
 
 > **Important:** Flow generation requires org connectivity (MCP tools). If you're offline, this skill won't function. For multiple flows, describe them one at a time.
 
+### Custom Tab — Tab Metadata
+
+**Triggers on**: tabs, navigation tabs, object tabs, web tabs, Visualforce tabs, Lightning component tabs.
+
+**Example prompts:**
+
+```
+Create a tab for the Project_Request__c custom object.
+```
+
+```
+Create a web tab called "Company Portal" that opens
+https://portal.example.com in a new window.
+```
+
+**What you get:**
+- Valid `CustomTab` XML with the correct element set per tab type
+- Object tabs: `<customObject>true</customObject>` with a unique contextual motif
+- Web tabs: `<url>`, encoding key, optional frame height
+- Visualforce tabs: references the page API name
+
+> **Note:** Many elements are forbidden by Salesforce depending on tab type. This skill enforces a strict allowlist to prevent deployment errors.
+
+---
+
+### Custom Application — Lightning App Metadata
+
+**Triggers on**: custom apps, Lightning apps, app navigation, "organize tabs into an application".
+
+**Example prompts:**
+
+```
+Create a Lightning app called "Project Management" with tabs for
+Project_Request__c, Task, and a dashboard. Use a blue header.
+```
+
+```
+Build a Console-style Lightning app for the Service team
+with Case, Contact, and Knowledge tabs.
+```
+
+**What you get:**
+- Valid `.app-meta.xml` with `uiType: Lightning`
+- Correct navigation type: `Standard` (default) or `Console` (multi-tab service workspaces only)
+- Mandatory `headerColor` branding in hex format (e.g. `#0070D2`)
+- Action overrides for custom object record pages
+- `formFactors` set for desktop (`LARGE`)
+
+---
+
+### FlexiPage — Lightning Pages
+
+**Triggers on**: Lightning pages, RecordPage, AppPage, HomePage, "add a component to a page", "customize the record page", `.flexipage-meta.xml`.
+
+**Example prompts:**
+
+```
+Generate a record page for Project_Request__c with the record
+highlights at the top and related lists on the right.
+```
+
+```
+Create an App Page for the Project Management app with a
+dashboard component in the main region.
+```
+
+**What you get:**
+- Valid `.flexipage-meta.xml` bootstrapped from the Salesforce CLI template (never hand-crafted)
+- Correct field references using `Record.{FieldApiName}` format
+- Unique identifiers and region names throughout the file
+- Dry-run deployment validation before finalizing
+
+> **Note:** Page XML is always CLI-bootstrapped — this prevents the most common FlexiPage deployment errors caused by hand-authored XML.
+
+---
+
+### Permission Set — Permission Set Metadata
+
+**Triggers on**: permission sets, object permissions, field-level security (FLS), tab visibility, app access.
+
+**Example prompts:**
+
+```
+Create a permission set called "Invoice Manager" with read and edit
+access to Invoice__c and all its fields. Include tab visibility.
+```
+
+```
+Build a permission set for read-only access to the Contract object.
+```
+
+**What you get:**
+- Valid `PermissionSet` XML with object, field, and user permissions
+- Least-privilege by default — only permissions explicitly requested
+- FLS format: `ObjectName.FieldName` (required and formula fields excluded automatically)
+- Tab naming: custom object tabs include `__c`, standard tabs use `standard-` prefix
+- User permissions for system capabilities (API access, reports, etc.)
+
+> **Note:** Including FLS for required or formula fields causes deployment failure. This skill validates against those automatically.
+
+---
+
+### Validation Rule — Validation Rule Metadata
+
+**Triggers on**: validation rules, "require field when", "prevent save if", formula validation, data quality rules.
+
+**Example prompts:**
+
+```
+Add a validation rule on Opportunity that requires Close Date
+to be in the future when Stage is Prospecting.
+```
+
+```
+Create a validation rule on Case that prevents closing a case
+unless the Resolution field is filled in.
+```
+
+**What you get:**
+- Valid `.validationRule-meta.xml`
+- Formula wrapped in `<![CDATA[...]]>` to prevent XML parsing issues
+- Correct formula functions: `ISPICKVAL()` for picklists, `DATEVALUE()` for DateTime fields
+- Clear, user-friendly error messages (max 255 characters)
+- Active by default
+
+---
+
+### Report — Salesforce Report Metadata
+
+**Triggers on**: reports, "create a report that shows…", report types (Tabular, Summary, Matrix, Joined), report folders, `.report-meta.xml`.
+
+**Example prompts:**
+
+```
+Create a Summary report showing open Opportunities grouped by
+Stage, with a bar chart and a total amount column.
+```
+
+```
+Build a Matrix report showing Cases closed per month, grouped
+by Agent across columns and Month across rows.
+```
+
+```
+Create a Tabular report of all Contacts created in the last 30 days
+with Name, Email, Account, and Created Date columns.
+```
+
+**What you get:**
+- Valid `.report-meta.xml` for the correct report type
+- Report type selection guidance (Tabular, Summary, Matrix, Joined)
+- Relative date range filters (never hardcoded dates)
+- Named following convention: `[Team] — [Purpose] — [Audience]`
+- `.reportFolder-meta.xml` generated if the folder doesn't exist
+- Deployment commands included
+
+**Report types available:** Tabular (list/export), Summary (grouped with subtotals), Matrix (cross-tab rows × columns), Joined (multi-block comparison)
+
+---
+
+### Dashboard — Salesforce Dashboard Metadata
+
+**Triggers on**: dashboards, KPI metrics, charts, "build a dashboard that shows…", `.dashboard-meta.xml`, dashboard filters, dynamic dashboards.
+
+**Example prompts:**
+
+```
+Build a Sales Pipeline dashboard with a headline Metric showing
+total pipeline value, a funnel chart by Stage, and a table of
+the top 10 open deals.
+```
+
+```
+Create a Service Operations dashboard with SLA compliance gauge,
+cases-by-type donut chart, and open cases table filtered by team.
+```
+
+**What you get:**
+- Valid `.dashboard-meta.xml` with the correct component types
+- Layout guidance: Metric (top row) → Chart (middle) → Table (bottom)
+- Running user mode recommendation (Specific User, Dynamic, or Team)
+- Up to 3 dashboard filters with clear labels
+- `.dashboardFolder-meta.xml` generated if folder doesn't exist
+- Deployment commands included
+
+**Component types available:** Metric, Gauge, Bar/Column Chart, Line Chart, Donut/Pie Chart, Funnel Chart, Scatter Chart, Table
+
 ---
 
 ## Output File Locations
@@ -334,15 +542,35 @@ force-app/main/default/
 │       ├── myComponent.js
 │       ├── myComponent.js-meta.xml
 │       └── myComponent.css
-├── objects/
-│   ├── Project_Request__c/
-│   │   ├── Project_Request__c.object-meta.xml
-│   │   ├── fields/
-│   │   │   └── Status__c.field-meta.xml
-│   │   └── listViews/
-│   │       └── All_Open_Requests.listView-meta.xml
-└── flows/
-    └── Opportunity_Closed_Won_Email.flow-meta.xml
+├── flows/
+│   └── Opportunity_Closed_Won_Email.flow-meta.xml
+├── flexipages/
+│   └── Project_Request_Record_Page.flexipage-meta.xml
+├── applications/
+│   └── Project_Management.app-meta.xml
+├── tabs/
+│   └── Project_Request__c.tab-meta.xml
+├── permissionsets/
+│   └── Invoice_Manager.permissionset-meta.xml
+├── reports/
+│   └── Sales_Reports/
+│       └── Open_Opps_by_Stage.report-meta.xml
+├── reportFolders/
+│   └── Sales_Reports.reportFolder-meta.xml
+├── dashboards/
+│   └── Sales_Dashboards/
+│       └── Pipeline_Overview.dashboard-meta.xml
+├── dashboardFolders/
+│   └── Sales_Dashboards.dashboardFolder-meta.xml
+└── objects/
+    └── Project_Request__c/
+        ├── Project_Request__c.object-meta.xml
+        ├── fields/
+        │   └── Status__c.field-meta.xml
+        ├── listViews/
+        │   └── All_Open_Requests.listView-meta.xml
+        └── validationRules/
+            └── Require_Description_When_Approved.validationRule-meta.xml
 ```
 
 ---
@@ -409,6 +637,18 @@ For Master-Detail fields: remove `required`, `deleteConstraint`, and `lookupFilt
 **Test coverage below 75%?**
 Ask Claude to run the tests and fix coverage gaps: "Run the test class and fix any methods with less than 75% coverage."
 
+**Custom tab deployment failing?**
+The skill enforces a strict element allowlist per tab type. Extra elements like `<sobjectName>`, `<isHidden>`, or `<type>` are forbidden and cause errors. Re-generate the tab using the skill rather than editing the XML by hand.
+
+**Permission set deployment failing?**
+Check that you haven't included FLS for required fields or formula fields — these cannot be set via metadata. Remove those `<fieldPermissions>` entries.
+
+**FlexiPage not rendering components?**
+Field references must use `Record.{FieldApiName}` format, not `{ObjectName}.{FieldApiName}`. Also confirm all `<identifier>` and region `<name>` values are unique across the entire file.
+
+**Report or Dashboard deploy failing?**
+Always deploy the folder metadata (`ReportFolder` / `DashboardFolder`) before or alongside the report/dashboard. Deploying into a non-existent folder fails silently.
+
 ---
 
 ## What's Inside `.claude/Skills/`
@@ -433,7 +673,21 @@ Ask Claude to run the tests and fix coverage gaps: "Run the test class and fix a
 │   └── SKILL.md
 ├── list-view/
 │   └── SKILL.md
-└── flow/
+├── flow/
+│   └── SKILL.md
+├── custom-tab/
+│   └── SKILL.md
+├── custom-application/
+│   └── SKILL.md
+├── flexipage/
+│   └── SKILL.md
+├── permission-set/
+│   └── SKILL.md
+├── validation-rule/
+│   └── SKILL.md
+├── report/
+│   └── SKILL.md
+└── dashboard/
     └── SKILL.md
 ```
 
