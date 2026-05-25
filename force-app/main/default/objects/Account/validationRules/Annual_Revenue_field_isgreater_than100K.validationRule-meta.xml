@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Annual_Revenue_field_isgreater_than100K</fullName>
+    <active>false</active>
+    <errorConditionFormula>AnnualRevenue &lt;1000000</errorConditionFormula>
+    <errorMessage>The Abishek ne bola hai error mssg aana chahiye</errorMessage>
+</ValidationRule>

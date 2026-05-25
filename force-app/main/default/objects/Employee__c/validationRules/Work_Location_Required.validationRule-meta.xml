@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Work_Location_Required</fullName>
+    <active>true</active>
+    <description>If Work Mode id &quot;Work From Office&quot;, then Work Location is required.</description>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Work_Mode__c, &quot;Work From Office&quot;),
+  ISBLANK(Work_Location__c)
+)</errorConditionFormula>
+    <errorMessage>If Work Mode id &quot;Work From Office&quot;, then Work Location is required.</errorMessage>
+</ValidationRule>

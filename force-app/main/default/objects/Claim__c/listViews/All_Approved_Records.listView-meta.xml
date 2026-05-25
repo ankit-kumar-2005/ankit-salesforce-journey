@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Approved_Records</fullName>
+    <columns>NAME</columns>
+    <columns>Type__c</columns>
+    <columns>Amount__c</columns>
+    <columns>Submission_Date__c</columns>
+    <columns>Status__c</columns>
+    <columns>Payment_Status__c</columns>
+    <columns>Approved_By__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Approved</value>
+    </filters>
+    <label>All Approved Records</label>
+</ListView>

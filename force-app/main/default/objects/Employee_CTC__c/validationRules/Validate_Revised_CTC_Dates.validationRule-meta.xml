@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Revised_CTC_Dates</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+  AND(
+    Effective_From__c = Employee__r.Joining_Date__c,
+    Is_Revised__c
+  ),
+  AND(
+    
+      Effective_From__c &gt;= (Employee__r.Joining_Date__c + 365)
+    ,
+    NOT(Is_Revised__c)
+  ),(
+      Employee__r.Joining_Date__c &lt;  Effective_From__c 
+)
+)</errorConditionFormula>
+    <errorMessage>Invalid Is Revised value. Please uncheck it if the Effective From date equals Joining Date, or check it if the Effective From date is 1+ or 2+ years after Joining.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Compact_layout</fullName>
+    <fields>Name</fields>
+    <fields>Project_Manager__c</fields>
+    <fields>Tasks_Completed__c</fields>
+    <fields>Project_Progress__c</fields>
+    <label>Project-Compact layout</label>
+</CompactLayout>

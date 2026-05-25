@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maternity_Paternity_Leave_Check</fullName>
+    <active>false</active>
+    <description>&quot;Please enter Maternity Leave From Date for Maternity leave or Child Birth Date for Paternity leave</description>
+    <errorConditionFormula>OR(
+  AND(
+    ISPICKVAL(Leave_Type__c, &quot;Maternity&quot;),
+    ISBLANK(Maternity_Leave_From__c)
+  ),
+  AND(
+    ISPICKVAL(Leave_Type__c, &quot;Paternity&quot;),
+    ISBLANK(Child_Birth_Date__c)
+  )
+)</errorConditionFormula>
+    <errorMessage>&quot;Please enter Maternity Leave From Date for Maternity leave or Child Birth Date for Paternity leave</errorMessage>
+</ValidationRule>

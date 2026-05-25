@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resignation_Date_Required</fullName>
+    <active>true</active>
+    <description>If Resigned is True &amp; Status is &quot;Resigned&quot;, Resignation
+
+Date is required and must be today&apos;s date.</description>
+    <errorConditionFormula>AND( Resigned__c =TRUE,
+      ISPICKVAL( Status__c ,&quot;Resigned&quot;),
+
+       OR(ISBLANK( Date_of_Resignation__c ),
+          Date_of_Resignation__c = TODAY()   )   
+     )</errorConditionFormula>
+    <errorMessage>Resignation Date is required and must be today&apos;s date.</errorMessage>
+</ValidationRule>

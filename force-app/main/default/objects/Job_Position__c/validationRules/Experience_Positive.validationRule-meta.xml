@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Experience_Positive</fullName>
+    <active>true</active>
+    <description>Experience Required must be greater than or equal to
+
+0.</description>
+    <errorConditionFormula>Experience_Required__c &lt;0</errorConditionFormula>
+    <errorMessage>Experience Required must be greater than or equal to
+
+0.</errorMessage>
+</ValidationRule>

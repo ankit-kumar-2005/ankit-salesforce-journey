@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EmployeeDepartment_PracticeHeadDepartmen</fullName>
+    <active>true</active>
+    <description>Employee Department &amp; Practice Head Department should
+be Equal.</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK( TEXT( Department__c ) )),
+  NOT(ISBLANK(TEXT(  Practice_Head__r.Department__c  ))),
+TEXT( Department__c ) &lt;&gt; TEXT(  Practice_Head__r.Department__c  )
+)</errorConditionFormula>
+    <errorMessage>Employee Department &amp; Practice Head Department should
+be Equal</errorMessage>
+</ValidationRule>

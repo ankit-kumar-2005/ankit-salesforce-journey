@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>The_Correct_Employee_Manager_of_the_Rela</fullName>
+    <active>true</active>
+    <errorConditionFormula>Employee_Manager__r.Id  &lt;&gt;  Employee__r.Employee_Manager__r.Related_User__r.Id</errorConditionFormula>
+    <errorMessage>error Please Select the Correct Employee Manager of the Related Employee</errorMessage>
+</ValidationRule>

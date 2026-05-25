@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resign_Date_vs_Joining_Date</fullName>
+    <active>true</active>
+    <description>Resignation Date must be greater than Joining Date.</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK( Date_of_Resignation__c )),
+  NOT(ISBLANK(Joining_Date__c)),
+  Date_of_Resignation__c  &lt;= Joining_Date__c
+)</errorConditionFormula>
+    <errorMessage>Resignation Date must be after Joining Date</errorMessage>
+</ValidationRule>

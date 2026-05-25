@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Manager_Checkbox_True</fullName>
+    <active>false</active>
+    <description>On Employee Creation if you select manager then check
+that employee Is_Manager checkbox should be true.</description>
+    <errorConditionFormula>AND(
+  ISNEW(),
+ 
+   Is_Manager__c  = FALSE
+)</errorConditionFormula>
+    <errorMessage>On Employee Creation if you select manager then check
+that employee Is_Manager checkbox should be true.</errorMessage>
+</ValidationRule>

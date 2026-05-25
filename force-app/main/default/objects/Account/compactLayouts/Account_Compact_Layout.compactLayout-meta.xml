@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Compact_Layout</fullName>
+    <fields>Total_Opportunity_Amount__c</fields>
+    <fields>Out_of_Business__c</fields>
+    <fields>No_of_Contacts__c</fields>
+    <fields>Closed_Won_Opportunity__c</fields>
+    <fields>No_Of_Opportunity__c</fields>
+    <label>Account Compact Layout</label>
+</CompactLayout>

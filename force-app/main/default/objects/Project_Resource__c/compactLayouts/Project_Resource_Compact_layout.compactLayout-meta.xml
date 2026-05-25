@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Resource_Compact_layout</fullName>
+    <fields>Employee__c</fields>
+    <fields>Project__c</fields>
+    <fields>Project_Start_Date__c</fields>
+    <fields>Project_End_Date__c</fields>
+    <fields>Assigned_Hours__c</fields>
+    <label>Project Resource-Compact layout</label>
+</CompactLayout>

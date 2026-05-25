@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Future_Time_Entry</fullName>
+    <active>true</active>
+    <description>Time entry date should not be a future date</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK( Date__c )),
+   Date__c  &gt; TODAY()
+)</errorConditionFormula>
+    <errorMessage>Time entry date should not be a future date</errorMessage>
+</ValidationRule>

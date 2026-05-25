@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_Entry_Compact_layout</fullName>
+    <fields>Name</fields>
+    <fields>In_Time__c</fields>
+    <fields>Out_Time__c</fields>
+    <fields>Total_Hours__c</fields>
+    <label>Time Entry Compact layout</label>
+</CompactLayout>

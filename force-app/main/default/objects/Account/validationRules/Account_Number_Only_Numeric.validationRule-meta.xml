@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Number_Only_Numeric</fullName>
+    <active>false</active>
+    <description>ccount Number must be numeric only</description>
+    <errorConditionFormula>NOT(REGEX( AccountNumber ,&quot;[0-9]+$&quot;))</errorConditionFormula>
+    <errorMessage>Account Number must be numeric only</errorMessage>
+</ValidationRule>

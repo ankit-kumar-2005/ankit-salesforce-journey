@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Joining_Date_Required</fullName>
+    <active>true</active>
+    <description>Joining Date must be filled if Offer Status is Accepted and Joining date
+
+should be blank if offer status is Rejected.</description>
+    <errorConditionFormula>OR(
+  AND(
+    ISPICKVAL(Offer_Status__c, &quot;Accepted&quot;),
+    ISBLANK(Joining_Date__c)
+  ),
+  AND(
+    ISPICKVAL(Offer_Status__c, &quot;Rejected&quot;),
+    NOT(ISBLANK(Joining_Date__c))
+  )
+)</errorConditionFormula>
+    <errorMessage>Joining Date is required when offer is accepted and must be blank if offer is rejected</errorMessage>
+</ValidationRule>

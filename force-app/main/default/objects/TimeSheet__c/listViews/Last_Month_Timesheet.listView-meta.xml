@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_Month_Timesheet</fullName>
+    <columns>NAME</columns>
+    <columns>Employee__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Spent_Hours__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>Last Month Timesheet</label>
+</ListView>

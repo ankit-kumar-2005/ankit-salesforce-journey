@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Weekend_Leave_Apply_Prevent</fullName>
+    <active>false</active>
+    <description>Start Date or End Date cannot fall on a weekend (Saturday or Sunday). Please select working days only</description>
+    <errorConditionFormula>OR( OR( WEEKDAY( Start_Date__c ) = 1,
+WEEKDAY( Start_Date__c) = 7 )
+,
+OR( WEEKDAY( End_Date__c )= 1,
+WEEKDAY( End_Date__c ) = 7 )
+)</errorConditionFormula>
+    <errorMessage>Start Date or End Date cannot fall on a weekend (Saturday or Sunday). Please select working days only</errorMessage>
+</ValidationRule>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>This_Month_Timesheet</fullName>
+    <columns>NAME</columns>
+    <columns>Employee__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Spent_Hours__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>THIS_MONTH</value>
+    </filters>
+    <label>This Month Timesheet</label>
+</ListView>

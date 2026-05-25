@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customization__c</fullName>
+    <label>Customization</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No Cheese</fullName>
+                <default>false</default>
+                <label>No Cheese</label>
+            </value>
+            <value>
+                <fullName>Extra Cheese</fullName>
+                <default>false</default>
+                <label>Extra Cheese</label>
+            </value>
+            <value>
+                <fullName>No Onion</fullName>
+                <default>false</default>
+                <label>No Onion</label>
+            </value>
+            <value>
+                <fullName>ExtraSauce</fullName>
+                <default>false</default>
+                <label>ExtraSauce</label>
+            </value>
+            <value>
+                <fullName>Gluten-Free</fullName>
+                <default>false</default>
+                <label>Gluten-Free</label>
+            </value>
+            <value>
+                <fullName>Vegan Option</fullName>
+                <default>false</default>
+                <label>Vegan Option</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

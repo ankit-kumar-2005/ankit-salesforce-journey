@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Application_Date_After_Job_Post</fullName>
+    <active>true</active>
+    <description>Application Date must be after Job Position creation date.</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK(Application_Date__c)),
+  Application_Date__c &lt;= DATEVALUE(Job_Position__r.CreatedDate)
+)</errorConditionFormula>
+    <errorMessage>Application Date must be after Job Position creation date.</errorMessage>
+</ValidationRule>

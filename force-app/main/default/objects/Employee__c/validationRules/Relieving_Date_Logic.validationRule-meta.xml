@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Relieving_Date_Logic</fullName>
+    <active>true</active>
+    <description>If Status is &quot;Relieved&quot; and Relieving Date &gt; Resignation
+Date or Today.</description>
+    <errorConditionFormula>AND( ISPICKVAL( Status__c,&quot;Relieved&quot;)  ,
+        OR( ISBLANK( Relieving_Date__c ),
+             Relieving_Date__c &gt;  Date_of_Resignation__c ,
+              Relieving_Date__c &gt; TODAY() ) 
+              )</errorConditionFormula>
+    <errorMessage>Relieving Date &gt; Resignation Date or Today.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HR_Manager_is_not_Equal_to_the_Job_Posit</fullName>
+    <active>true</active>
+    <errorConditionFormula>HR_Manager__r.Id &lt;&gt;  Job_Position__r.Hiring_Manager__r.Id</errorConditionFormula>
+    <errorMessage>Please Select the HR Manager of the Associate Job Position</errorMessage>
+</ValidationRule>

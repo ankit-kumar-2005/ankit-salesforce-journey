@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Employee_CTC_Compact_layout</fullName>
+    <fields>Name</fields>
+    <fields>Annual_CTC__c</fields>
+    <fields>Employee__c</fields>
+    <fields>Basic_Salary__c</fields>
+    <fields>Net_Amount__c</fields>
+    <fields>Active__c</fields>
+    <label>Employee CTC Compact layout</label>
+</CompactLayout>

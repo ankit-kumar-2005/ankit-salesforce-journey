@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Designation__c</fullName>
+    <label>Designation</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Department__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Trainee Software Engineer</fullName>
+                <default>false</default>
+                <label>Trainee Software Engineer</label>
+            </value>
+            <value>
+                <fullName>Associate Software Engineer</fullName>
+                <default>false</default>
+                <label>Associate Software Engineer</label>
+            </value>
+            <value>
+                <fullName>Software Engineer</fullName>
+                <default>false</default>
+                <label>Software Engineer</label>
+            </value>
+            <value>
+                <fullName>Senior Software Engineer</fullName>
+                <default>false</default>
+                <label>Senior Software Engineer</label>
+            </value>
+            <value>
+                <fullName>Tech Lead</fullName>
+                <default>false</default>
+                <label>Tech Lead</label>
+            </value>
+            <value>
+                <fullName>Project Lead</fullName>
+                <default>false</default>
+                <label>Project Lead</label>
+            </value>
+            <value>
+                <fullName>Project Manager</fullName>
+                <default>false</default>
+                <label>Project Manager</label>
+            </value>
+            <value>
+                <fullName>Solution Architect</fullName>
+                <default>false</default>
+                <label>Solution Architect</label>
+            </value>
+            <value>
+                <fullName>Technical Architect</fullName>
+                <default>false</default>
+                <label>Technical Architect</label>
+            </value>
+            <value>
+                <fullName>Delivery Head</fullName>
+                <default>false</default>
+                <label>Delivery Head</label>
+            </value>
+            <value>
+                <fullName>Business Analyst</fullName>
+                <default>false</default>
+                <label>Business Analyst</label>
+            </value>
+            <value>
+                <fullName>Consultant</fullName>
+                <default>false</default>
+                <label>Consultant</label>
+            </value>
+            <value>
+                <fullName>Senior Consultant</fullName>
+                <default>false</default>
+                <label>Senior Consultant</label>
+            </value>
+            <value>
+                <fullName>Quality Assurance Engineer</fullName>
+                <default>false</default>
+                <label>Quality Assurance Engineer</label>
+            </value>
+            <value>
+                <fullName>Senior Quality Assurance Engineer</fullName>
+                <default>false</default>
+                <label>Senior Quality Assurance Engineer</label>
+            </value>
+            <value>
+                <fullName>Quality Assurance Manager</fullName>
+                <default>false</default>
+                <label>Quality Assurance Manager</label>
+            </value>
+            <value>
+                <fullName>QA Lead</fullName>
+                <default>false</default>
+                <label>QA Lead</label>
+            </value>
+            <value>
+                <fullName>Senior Analyst</fullName>
+                <default>false</default>
+                <label>Senior Analyst</label>
+            </value>
+            <value>
+                <fullName>HR Generalist</fullName>
+                <default>false</default>
+                <label>HR Generalist</label>
+            </value>
+            <value>
+                <fullName>HR Specialist</fullName>
+                <default>false</default>
+                <label>HR Specialist</label>
+            </value>
+            <value>
+                <fullName>HR Administrator</fullName>
+                <default>false</default>
+                <label>HR Administrator</label>
+            </value>
+            <value>
+                <fullName>Human Resource Manager</fullName>
+                <default>false</default>
+                <label>Human Resource Manager</label>
+            </value>
+            <value>
+                <fullName>Chief Human Resource Officer</fullName>
+                <default>false</default>
+                <label>Chief Human Resource Officer</label>
+            </value>
+            <value>
+                <fullName>TA Executive</fullName>
+                <default>false</default>
+                <label>TA Executive</label>
+            </value>
+            <value>
+                <fullName>Customer Relationship Manager</fullName>
+                <default>false</default>
+                <label>Customer Relationship Manager</label>
+            </value>
+            <value>
+                <fullName>Customer Success Manager</fullName>
+                <default>false</default>
+                <label>Customer Success Manager</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Trainee Software Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Associate Software Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Software Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Senior Software Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Tech Lead</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Project Lead</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Project Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Solution Architect</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Technical Architect</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Core Delivery</controllingFieldValue>
+            <valueName>Delivery Head</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Human Resource</controllingFieldValue>
+            <valueName>HR Generalist</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Human Resource</controllingFieldValue>
+            <valueName>HR Specialist</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Human Resource</controllingFieldValue>
+            <valueName>HR Administrator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Human Resource</controllingFieldValue>
+            <valueName>Human Resource Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Human Resource</controllingFieldValue>
+            <valueName>Chief Human Resource Officer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Human Resource</controllingFieldValue>
+            <valueName>TA Executive</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Quality Assurance</controllingFieldValue>
+            <valueName>Quality Assurance Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Quality Assurance</controllingFieldValue>
+            <valueName>Senior Quality Assurance Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Quality Assurance</controllingFieldValue>
+            <valueName>Quality Assurance Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Quality Assurance</controllingFieldValue>
+            <valueName>QA Lead</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Quality Assurance</controllingFieldValue>
+            <valueName>Senior Analyst</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Business Analyst</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Consultant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Senior Consultant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Customer Relationship Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Customer Success Manager</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

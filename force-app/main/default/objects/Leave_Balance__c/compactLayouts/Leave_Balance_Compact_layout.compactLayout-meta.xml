@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Leave_Balance_Compact_layout</fullName>
+    <fields>Name</fields>
+    <fields>Employee__c</fields>
+    <fields>Leave_Balance__c</fields>
+    <label>Leave Balance-Compact layout</label>
+</CompactLayout>

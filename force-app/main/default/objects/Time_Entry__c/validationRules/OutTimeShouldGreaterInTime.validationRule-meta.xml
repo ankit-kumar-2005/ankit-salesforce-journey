@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OutTimeShouldGreaterInTime</fullName>
+    <active>true</active>
+    <description>Out time should be greater than In time and In time should be
+
+less than Out time.</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK(In_Time__c)),
+  NOT(ISBLANK(Out_Time__c)),
+  Out_Time__c &lt;= In_Time__c
+)</errorConditionFormula>
+    <errorMessage>&quot;Out Time must be later than In Time</errorMessage>
+</ValidationRule>

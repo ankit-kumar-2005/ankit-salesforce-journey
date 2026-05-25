@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>device_type__c</fullName>
+    <label>device type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Laptop</fullName>
+                <default>false</default>
+                <label>Laptop</label>
+            </value>
+            <value>
+                <fullName>Desktop</fullName>
+                <default>false</default>
+                <label>Desktop</label>
+            </value>
+            <value>
+                <fullName>Office pc</fullName>
+                <default>false</default>
+                <label>Office pc</label>
+            </value>
+            <value>
+                <fullName>presonal pc</fullName>
+                <default>false</default>
+                <label>presonal pc</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

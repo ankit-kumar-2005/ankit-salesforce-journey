@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Employee_Manager_Is_Valid</fullName>
+    <active>false</active>
+    <errorConditionFormula>Employee_Manager__r.Id  &lt;&gt;  Employee_Name__r.Employee_Manager__r.Related_User__r.Id</errorConditionFormula>
+    <errorMessage>Please Select the Current User</errorMessage>
+</ValidationRule>

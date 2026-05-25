@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_Entry_Not_Allowed_In_Weekend</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+   WEEKDAY(Date__c) = 1, 
+   WEEKDAY(Date__c) = 7   
+)</errorConditionFormula>
+    <errorMessage>Time entry is not allowed on Saturday or Sunday.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Category__c</fullName>
+    <label>Sub Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Category__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>North Indian Veg</fullName>
+                <default>false</default>
+                <label>North Indian Veg</label>
+            </value>
+            <value>
+                <fullName>South Indian Veg</fullName>
+                <default>false</default>
+                <label>South Indian Veg</label>
+            </value>
+            <value>
+                <fullName>Paneer Dishes</fullName>
+                <default>false</default>
+                <label>Paneer Dishes</label>
+            </value>
+            <value>
+                <fullName>Veg Curries</fullName>
+                <default>false</default>
+                <label>Veg Curries</label>
+            </value>
+            <value>
+                <fullName>Veg Biryani</fullName>
+                <default>false</default>
+                <label>Veg Biryani</label>
+            </value>
+            <value>
+                <fullName>Salads</fullName>
+                <default>false</default>
+                <label>Salads</label>
+            </value>
+            <value>
+                <fullName>Veg Starters</fullName>
+                <default>false</default>
+                <label>Veg Starters</label>
+            </value>
+            <value>
+                <fullName>Chicken Dishes</fullName>
+                <default>false</default>
+                <label>Chicken Dishes</label>
+            </value>
+            <value>
+                <fullName>Mutton Dishes</fullName>
+                <default>false</default>
+                <label>Mutton Dishes</label>
+            </value>
+            <value>
+                <fullName>Egg Dishes</fullName>
+                <default>false</default>
+                <label>Egg Dishes</label>
+            </value>
+            <value>
+                <fullName>Fish &amp; Seafood</fullName>
+                <default>false</default>
+                <label>Fish &amp; Seafood</label>
+            </value>
+            <value>
+                <fullName>Non-Veg Curries</fullName>
+                <default>false</default>
+                <label>Non-Veg Curries</label>
+            </value>
+            <value>
+                <fullName>Non-Veg Biryani</fullName>
+                <default>false</default>
+                <label>Non-Veg Biryani</label>
+            </value>
+            <value>
+                <fullName>Non-Veg Starters</fullName>
+                <default>false</default>
+                <label>Non-Veg Starters</label>
+            </value>
+            <value>
+                <fullName>Pasta</fullName>
+                <default>false</default>
+                <label>Pasta</label>
+            </value>
+            <value>
+                <fullName>Pizza</fullName>
+                <default>false</default>
+                <label>Pizza</label>
+            </value>
+            <value>
+                <fullName>Risotto</fullName>
+                <default>false</default>
+                <label>Risotto</label>
+            </value>
+            <value>
+                <fullName>Lasagna</fullName>
+                <default>false</default>
+                <label>Lasagna</label>
+            </value>
+            <value>
+                <fullName>Italian Breads</fullName>
+                <default>false</default>
+                <label>Italian Breads</label>
+            </value>
+            <value>
+                <fullName>Bruschetta</fullName>
+                <default>false</default>
+                <label>Bruschetta</label>
+            </value>
+            <value>
+                <fullName>Noodles</fullName>
+                <default>false</default>
+                <label>Noodles</label>
+            </value>
+            <value>
+                <fullName>Manchurian</fullName>
+                <default>false</default>
+                <label>Manchurian</label>
+            </value>
+            <value>
+                <fullName>Spring Rolls</fullName>
+                <default>false</default>
+                <label>Spring Rolls</label>
+            </value>
+            <value>
+                <fullName>Fried Rice</fullName>
+                <default>false</default>
+                <label>Fried Rice</label>
+            </value>
+            <value>
+                <fullName>Momos</fullName>
+                <default>false</default>
+                <label>Momos</label>
+            </value>
+            <value>
+                <fullName>Schezwan Dishes</fullName>
+                <default>false</default>
+                <label>Schezwan Dishes</label>
+            </value>
+            <value>
+                <fullName>Veg Main Course</fullName>
+                <default>false</default>
+                <label>Veg Main Course</label>
+            </value>
+            <value>
+                <fullName>Non-Veg Main Course</fullName>
+                <default>false</default>
+                <label>Non-Veg Main Course</label>
+            </value>
+            <value>
+                <fullName>Dal &amp; Rice Combos</fullName>
+                <default>false</default>
+                <label>Dal &amp; Rice Combos</label>
+            </value>
+            <value>
+                <fullName>Roti/Naan Combos</fullName>
+                <default>false</default>
+                <label>Roti/Naan Combos</label>
+            </value>
+            <value>
+                <fullName>Thali (Veg/Non-Veg)</fullName>
+                <default>false</default>
+                <label>Thali (Veg/Non-Veg)</label>
+            </value>
+            <value>
+                <fullName>Curry &amp; Bread Combos</fullName>
+                <default>false</default>
+                <label>Curry &amp; Bread Combos</label>
+            </value>
+            <value>
+                <fullName>Ice Cream</fullName>
+                <default>false</default>
+                <label>Ice Cream</label>
+            </value>
+            <value>
+                <fullName>Cake &amp; Pastries</fullName>
+                <default>false</default>
+                <label>Cake &amp; Pastries</label>
+            </value>
+            <value>
+                <fullName>Indian Sweets</fullName>
+                <default>false</default>
+                <label>Indian Sweets</label>
+            </value>
+            <value>
+                <fullName>Chocolates</fullName>
+                <default>false</default>
+                <label>Chocolates</label>
+            </value>
+            <value>
+                <fullName>Puddings</fullName>
+                <default>false</default>
+                <label>Puddings</label>
+            </value>
+            <value>
+                <fullName>Custards</fullName>
+                <default>false</default>
+                <label>Custards</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Veg</controllingFieldValue>
+            <valueName>North Indian Veg</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Veg</controllingFieldValue>
+            <valueName>South Indian Veg</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Veg</controllingFieldValue>
+            <valueName>Paneer Dishes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Veg</controllingFieldValue>
+            <valueName>Veg Curries</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Veg</controllingFieldValue>
+            <valueName>Veg Biryani</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Veg</controllingFieldValue>
+            <valueName>Salads</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Veg</controllingFieldValue>
+            <valueName>Veg Starters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Veg</controllingFieldValue>
+            <valueName>Chicken Dishes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Veg</controllingFieldValue>
+            <valueName>Mutton Dishes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Veg</controllingFieldValue>
+            <valueName>Egg Dishes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Veg</controllingFieldValue>
+            <valueName>Fish &amp; Seafood</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Veg</controllingFieldValue>
+            <valueName>Non-Veg Curries</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Veg</controllingFieldValue>
+            <valueName>Non-Veg Biryani</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Veg</controllingFieldValue>
+            <valueName>Non-Veg Starters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Italian</controllingFieldValue>
+            <valueName>Pasta</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Italian</controllingFieldValue>
+            <valueName>Pizza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Italian</controllingFieldValue>
+            <valueName>Risotto</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Italian</controllingFieldValue>
+            <valueName>Lasagna</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Italian</controllingFieldValue>
+            <valueName>Italian Breads</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Italian</controllingFieldValue>
+            <valueName>Bruschetta</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chinese</controllingFieldValue>
+            <valueName>Noodles</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chinese</controllingFieldValue>
+            <valueName>Manchurian</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chinese</controllingFieldValue>
+            <valueName>Spring Rolls</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chinese</controllingFieldValue>
+            <valueName>Fried Rice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chinese</controllingFieldValue>
+            <valueName>Momos</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chinese</controllingFieldValue>
+            <valueName>Schezwan Dishes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Main Course</controllingFieldValue>
+            <valueName>Veg Main Course</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Main Course</controllingFieldValue>
+            <valueName>Non-Veg Main Course</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Main Course</controllingFieldValue>
+            <valueName>Dal &amp; Rice Combos</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Main Course</controllingFieldValue>
+            <valueName>Roti/Naan Combos</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Main Course</controllingFieldValue>
+            <valueName>Thali (Veg/Non-Veg)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Main Course</controllingFieldValue>
+            <valueName>Curry &amp; Bread Combos</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Desserts</controllingFieldValue>
+            <valueName>Ice Cream</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Desserts</controllingFieldValue>
+            <valueName>Cake &amp; Pastries</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Desserts</controllingFieldValue>
+            <valueName>Indian Sweets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Desserts</controllingFieldValue>
+            <valueName>Chocolates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Desserts</controllingFieldValue>
+            <valueName>Puddings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Desserts</controllingFieldValue>
+            <valueName>Custards</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

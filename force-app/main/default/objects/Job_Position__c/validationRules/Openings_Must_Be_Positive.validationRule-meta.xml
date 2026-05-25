@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Openings_Must_Be_Positive</fullName>
+    <active>true</active>
+    <description>Number of Openings must be greater than 0.</description>
+    <errorConditionFormula>AND(
+  OR(
+    ISPICKVAL(Status__c, &quot;Open&quot;),
+    ISPICKVAL(Status__c, &quot;On Hold&quot;)
+  ),
+  Number_of_Openings__c &lt;= 0
+)</errorConditionFormula>
+    <errorMessage>Number of Openings must be greater than 0.</errorMessage>
+</ValidationRule>
