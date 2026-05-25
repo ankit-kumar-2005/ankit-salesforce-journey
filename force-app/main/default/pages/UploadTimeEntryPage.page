@@ -1,0 +1,23 @@
+<apex:page standardController="Time_Entry__c" extensions="UploadTimeEntryController" lightningStylesheets="true">
+    <apex:form enctype="multipart/form-data">
+        <apex:pageMessages id="msgs"/>
+
+        <apex:pageBlock title="Upload CSV File">
+            <apex:pageBlockSection columns="2">
+                <apex:inputFile value="{!csvFileBody}" filename="{!csvAsString}" />
+                <apex:commandButton value="Import Data" action="{!importCSVFile}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Time Entries">
+            <apex:pageBlockTable value="{!timeEntryList}" var="te" id="timeEntriesTable">
+                <apex:column value="{!te.Employee_Code__c}" />
+               // <!-- <apex:column value="{!te.Employee_Name__r.Name}" /> -->
+                <apex:column value="{!te.Date__c}" />
+                <apex:column value="{!te.In_Time__c}" />
+                <apex:column value="{!te.Out_Time__c}" />
+                <apex:column value="{!te.Owner.Name}" />
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

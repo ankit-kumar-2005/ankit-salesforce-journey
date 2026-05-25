@@ -1,0 +1,20 @@
+<template>
+    <div class="slds-m-around_medium">
+        <lightning-card title="Send Message" icon-name="custom:custom14">
+    <lightning-input
+    type="text"
+    label="Enter your message"
+    value={message}
+    onchange={handleMessageChange}
+    ></lightning-input>
+
+    <lightning-button 
+    label="send"
+    onclick={handleclick}
+    ></lightning-button>
+
+    </lightning-card>
+    
+        </div>
+    
+</template>

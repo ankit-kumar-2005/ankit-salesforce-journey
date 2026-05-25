@@ -1,0 +1,394 @@
+<apex:page standardController="Employee_Salary__c" 
+           extensions="PayslipSenderController" 
+           renderAs="PDF" 
+           standardStylesheets="false" 
+           applyBodyTag="false" 
+           applyHtmlTag="false" 
+           showHeader="false">
+
+    <html>
+        <head>
+            <style>
+                @page { size: A4; margin: 0.5in; }
+                body { font-family: Arial, sans-serif; font-size: 11px; margin: 0; padding: 0; }
+
+                .payslip-container { width: 100%; border: 2px solid #000; border-collapse: collapse; }
+                .header-row { background-color: #f5f5f5; }
+                .header-cell, .logo-cell { border: 1px solid #000; padding: 10px; vertical-align: top; }
+                .logo-cell { text-align: center; width: 150px; }
+
+                .company-name { font-size: 20px; font-weight: bold; }
+                .company-address { margin-top: 5px; }
+
+                .payslip-title { text-align: center; padding: 8px; font-weight: bold; border: 1px solid #000; background-color: #e6e6e6; }
+
+                .employee-summary-header { background-color: #d9d9d9; font-weight: bold; padding: 5px 10px; border: 1px solid #000; }
+
+                .employee-details, .salary-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+                .employee-details td, .salary-table th, .salary-table td { border: 1px solid #000; padding: 4px 8px; }
+
+                .earnings-header, .deductions-header, .particulars-header { background-color: #d9d9d9; font-weight: bold; text-align: center; }
+                .amount-column { text-align: right; width: 80px; }
+
+                .gross-earnings { font-weight: bold; background-color: #f0f0f0; }
+                .netpay-section { font-weight: bold; background-color: #e6e6e6; }
+
+                .net-payable-words, .lop-days { text-align: center; padding: 5px; border: 1px solid #000; font-weight: bold; margin-top: 5px; }
+            </style>
+        </head>
+
+        <body>
+            <!-- Company Header -->
+            <table class="payslip-container">
+                <tr class="header-row">
+                    <td class="header-cell">
+                        <div class="company-name">
+                            <apex:outputText value="{!companyDetails.Company_Name__c}" rendered="{!companyDetails != null}"/>
+                            <apex:outputText value="Company Name" rendered="{!companyDetails == null}"/>
+                        </div>
+                        <div class="company-address">
+                            <apex:outputText value="{!companyDetails.Company_Address__c}" rendered="{!companyDetails != null}"/>
+                            <apex:outputText value="Company Address" rendered="{!companyDetails == null}"/>
+                        </div>
+                    </td>
+                    <td class="logo-cell">
+                        <apex:image url="{!URLFOR($Resource.CompanyLogo)}" alt="Company Logo" width="150" height="100" rendered="{!$Resource.CompanyLogo != null}"/>
+                        <apex:outputText value="[LOGO]" rendered="{!$Resource.CompanyLogo == null}"/>
+                    </td>
+                </tr>
+
+                <!-- Payslip Title -->
+                <tr>
+                    <td colspan="2" class="payslip-title">
+                        Payslip for the month of 
+                        <apex:outputText value="{!salary.Month__r.Name}" rendered="{!salary != null && salary.Month__r != null}"/>
+                        <apex:outputText value=" {!salary.Month__r.Year__c}" rendered="{!salary != null && salary.Month__r != null}"/>
+                      <apex:outputText value="{!now()}" rendered="{!salary == null || salary.Month__r == null}"/>
+
+
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Employee Summary -->
+            <div class="employee-summary-header">Employee Pay Summary</div>
+
+    <!-- Employee Details -->
+<table class="employee-details">
+    <tr>
+        <td>Employee Name</td>
+        <td>
+            <apex:outputText value="{!employee.Name}" rendered="{!NOT(ISBLANK(employee.Name))}"/>
+            <apex:outputText value="[Employee Name]" rendered="{!ISBLANK(employee.Name)}"/>
+        </td>
+        <td>PAN</td>
+        <td>
+            <apex:outputText value="{!employee.Pan_Card_Number__c}" rendered="{!NOT(ISBLANK(employee.Pan_Card_Number__c))}"/>
+            <apex:outputText value="[PAN Number]" rendered="{!ISBLANK(employee.Pan_Card_Number__c)}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Designation</td>
+        <td>
+            <apex:outputText value="{!employee.Designation__c}" rendered="{!NOT(ISBLANK(employee.Designation__c))}"/>
+            <apex:outputText value="[Designation]" rendered="{!ISBLANK(employee.Designation__c)}"/>
+        </td>
+        <td>Bank Name</td>
+        <td>
+            <apex:outputText value="{!employee.Bank_Name__c}" rendered="{!NOT(ISBLANK(employee.Bank_Name__c))}"/>
+            <apex:outputText value="[Bank Name]" rendered="{!ISBLANK(employee.Bank_Name__c)}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Employee ID</td>
+        <td>
+            <apex:outputText value="{!employee.Employee_Code__c}" rendered="{!NOT(ISBLANK(employee.Employee_Code__c))}"/>
+            <apex:outputText value="[Employee ID]" rendered="{!ISBLANK(employee.Employee_Code__c)}"/>
+        </td>
+        <td>Bank A/C No.</td>
+        <td>
+            <apex:outputText value="{!employee.Bank_Account_Number__c}" rendered="{!NOT(ISBLANK(employee.Bank_Account_Number__c))}"/>
+            <apex:outputText value="[Account Number]" rendered="{!ISBLANK(employee.Bank_Account_Number__c)}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Date of Joining</td>
+        <td>
+            <apex:outputText value="{0, date, dd-MM-yyyy}" rendered="{!NOT(ISBLANK(employee.Joining_Date__c))}">
+                <apex:param value="{!employee.Joining_Date__c}" />
+            </apex:outputText>
+            <apex:outputText value="[Joining Date]" rendered="{!ISBLANK(employee.Joining_Date__c)}"/>
+        </td>
+        <td>P.F. A/C Number</td>
+        <td>
+            <apex:outputText value="{!employee.PF_Number__c}" rendered="{!NOT(ISBLANK(employee.PF_Number__c))}"/>
+            <apex:outputText value="[PF Account]" rendered="{!ISBLANK(employee.PF_Number__c)}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Department</td>
+        <td>
+            <apex:outputText value="{!employee.Department__c}" rendered="{!NOT(ISBLANK(employee.Department__c))}"/>
+            <apex:outputText value="[Department]" rendered="{!ISBLANK(employee.Department__c)}"/>
+        </td>
+        <td>UAN Number</td>
+        <td>
+            <apex:outputText value="{!employee.UAN_Number__c}" rendered="{!NOT(ISBLANK(employee.UAN_Number__c))}"/>
+            <apex:outputText value="[UAN Number]" rendered="{!ISBLANK(employee.UAN_Number__c)}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Location</td>
+        <td>
+            <apex:outputText value="{!employee.Current_Location__c}" rendered="{!NOT(ISBLANK(employee.Current_Location__c))}"/>
+            <apex:outputText value="[Location]" rendered="{!ISBLANK(employee.Current_Location__c)}"/>
+        </td>
+        <td>Days Worked</td>
+        <td>
+            <apex:outputText value="{!salary.Days_Worked__c}" rendered="{!NOT(ISBLANK(TEXT(salary.Days_Worked__c)))}"/>
+            <apex:outputText value="[Days Worked]" rendered="{!ISBLANK(TEXT(salary.Days_Worked__c))}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Pay Date</td>
+        <td colspan="3">
+            <apex:outputText value="{0, date, dd-MM-yyyy}" rendered="{!NOT(ISBLANK(salary.Pay_Date__c))}">
+                <apex:param value="{!salary.Pay_Date__c}" />
+            </apex:outputText>
+            <apex:outputText value="[Pay Date]" rendered="{!ISBLANK(salary.Pay_Date__c)}"/>
+        </td>
+    </tr>
+</table>
+
+
+            
+
+            <!-- Salary Details -->
+            <table class="salary-table">
+                <tr>
+                    <th class="earnings-header">EARNINGS</th>
+                    <th class="earnings-header">Amount</th>
+                    <th class="particulars-header">DEDUCTIONS</th>
+                    <th class="deductions-header">Amount</th>
+                </tr>
+
+                <!-- Earnings & Deductions Rows -->
+                <tr>
+                    <td>Basic</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Basic__c != null}">
+                            <apex:param value="{!salary.Basic__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Basic__c == null}"/>
+                    </td>
+                    <td>Income Tax</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Income_Tax__c != null}">
+                            <apex:param value="{!salary.Income_Tax__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Income_Tax__c == null}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>House Rent Allowance</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.House_Rent_Allowance__c != null}">
+                            <apex:param value="{!salary.House_Rent_Allowance__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.House_Rent_Allowance__c == null}"/>
+                    </td>
+                    <td>Profession Tax</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Profession_Tax__c != null}">
+                            <apex:param value="{!salary.Profession_Tax__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Profession_Tax__c == null}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Special Allowance</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Special_Allowance__c != null}">
+                            <apex:param value="{!salary.Special_Allowance__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Special_Allowance__c == null}"/>
+                    </td>
+                    <td>P.F.</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.P_F__c != null}">
+                            <apex:param value="{!salary.P_F__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.P_F__c == null}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Statutory Bonus</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Statutory_Bonus__c != null}">
+                            <apex:param value="{!salary.Statutory_Bonus__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Statutory_Bonus__c == null}"/>
+                    </td>
+                    <td>Other Deduction 1</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Other_Deduction__c != null}">
+                            <apex:param value="{!salary.Other_Deduction__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Other_Deduction__c == null}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>LTA Allowance</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.LTA_Allowance__c != null}">
+                            <apex:param value="{!salary.LTA_Allowance__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.LTA_Allowance__c == null}"/>
+                    </td>
+                    <td>Other Deduction 2</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Other_Deduction_2__c != null}">
+                            <apex:param value="{!salary.Other_Deduction_2__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Other_Deduction_2__c == null}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Other Earning 1</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Other_Earning_1__c != null}">
+                            <apex:param value="{!salary.Other_Earning_1__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Other_Earning_1__c == null}"/>
+                    </td>
+                    <td>Other Deduction 3</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Other_Deduction_3__c != null}">
+                            <apex:param value="{!salary.Other_Deduction_3__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Other_Deduction_3__c == null}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Other Earning 2</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Other_Earning_2__c != null}">
+                            <apex:param value="{!salary.Other_Earning_2__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Other_Earning_2__c == null}"/>
+                    </td>
+                    <td></td><td></td>
+                </tr>
+
+                <tr>
+                    <td>Other Earning 3</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Other_Earning_3__c != null}">
+                            <apex:param value="{!salary.Other_Earning_3__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Other_Earning_3__c == null}"/>
+                    </td>
+                    <td></td><td></td>
+                </tr>
+
+                <!-- Gross and Net -->
+                <tr class="gross-earning">
+                    <td>Gross Earnings</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Gross_Earning__c!= null}">
+                            <apex:param value="{!salary.Gross_Earning__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Gross_Earning__c== null}"/>
+                    </td>
+                    <td>Total Deductions</td>
+                    <td class="amount-column">
+                        <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Total_Deduction__c != null}">
+                            <apex:param value="{!salary.Total_Deduction__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Total_Deduction__c == null}"/>
+                    </td>
+                </tr>
+
+               <!-- NET PAY SECTION -->
+<table class="netpay-section" width="100%">
+    <tr>
+        <th colspan="2">NETPAY</th>
+        <th>AMOUNT</th>
+    </tr>
+
+    <tr>
+        <td colspan="2">Gross Earnings</td>
+        <td class="amount-column">
+            <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Gross_Earning__c != null}">
+                <apex:param value="{!salary.Gross_Earning__c}" />
+            </apex:outputText>
+            <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Gross_Earning__c == null}"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">Total Deductions</td>
+        <td class="amount-column">
+            <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Total_Deduction__c != null}">
+                <apex:param value="{!salary.Total_Deduction__c}" />
+            </apex:outputText>
+            <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Total_Deduction__c == null}"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">Total Reimbursements</td>
+        <td class="amount-column">
+            <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Total_Reimbursements__c != null}">
+                <apex:param value="{!salary.Total_Reimbursements__c}" />
+            </apex:outputText>
+            <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Total_Reimbursements__c == null}"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="right-align"><b>Total Net Payable</b></td>
+        <td class="amount-column"><b>
+            <apex:outputText value="₹{0, number, ###,##0.00}" rendered="{!salary != null && salary.Total_Net_Payablee__c != null}">
+                <apex:param value="{!salary.Total_Net_Payablee__c}" />
+            </apex:outputText>
+            <apex:outputText value="₹0.00" rendered="{!salary == null || salary.Total_Net_Payablee__c == null}"/>
+        </b></td>
+    </tr>
+</table>
+
+            </table>
+
+           <!-- Net Payable in Words -->
+<div class="net-payable-words">
+    <strong>Total Net Payable: </strong>
+    <apex:outputText value="₹{0, number, ###,##0.00}" 
+                     rendered="{!salary != null && salary.Total_Net_Payablee__c != null}">
+        <apex:param value="{!salary.Total_Net_Payablee__c}" />
+    </apex:outputText>
+    <apex:outputText value="₹0.00" 
+                     rendered="{!salary == null || salary.Total_Net_Payablee__c == null}"/>
+    <br/>
+    <strong>Amount in Words: </strong>
+    <apex:outputText value="{!NetPayInWords}" rendered="{!NetPayInWords != null}"/>
+    <apex:outputText value="Zero Rupees Only" rendered="{!NetPayInWords == null}"/>
+</div>
+
+
+           
+            <!-- LOP Days -->
+            <div class="lop-days">
+                <strong>Loss of Pay Days: </strong>
+                <apex:outputText value="{!salary.LOP_Days__c}" rendered="{!salary != null && salary.LOP_Days__c != null}"/>
+                <apex:outputText value="0" rendered="{!salary == null || salary.LOP_Days__c == null}"/>
+            </div>
+           
+        </body>
+    </html>
+</apex:page>

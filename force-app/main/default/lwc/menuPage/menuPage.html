@@ -1,0 +1,163 @@
+<template>
+      <template if:false={showCartPage}>
+    <lightning-card>
+        <!-- Header -->
+        <div class="slds-p-around_medium slds-grid slds-grid_align-spread slds-bg-primary">
+            <div>
+                <lightning-button-icon icon-name="utility:home" alternative-text="Home"
+                    title="Go to Home" onclick={handleHomeClick}>
+                </lightning-button-icon>
+            </div>
+
+            <!-- Search -->
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input 
+                    type="search"
+                    label="Menu Name"
+                    value={searchMenu}
+                    onchange={handleSearchMenuChange}>
+                </lightning-input>
+            </div>
+
+            <!-- Category -->
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-combobox
+                    label="Category"
+                    name="category"
+                    value={selectCategory}
+                    options={categoryOptions}
+                    onchange={handleSearchCategoryChange}>
+                </lightning-combobox>
+            </div>
+
+            <!-- Cart Icon -->
+            <div>
+                <lightning-button-icon icon-name="utility:cart" alternative-text="Cart"
+                    title="View Cart" onclick={handleCartClick}>
+                </lightning-button-icon>
+                <span class="slds-badge slds-badge_inverse">{cartCount}</span>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-wrap slds-gutters slds-p-around_medium">
+            <template for:each={paginatedMenu} for:item="item">
+                <div key={item.Id} class="slds-col slds-size_1-of-4">
+                    <div class="slds-card slds-p-around_small slds-m-bottom_small menu-card" 
+                         style="border-radius:0.5rem; background:#f9f9f9; cursor:pointer;"
+                         onclick={handleCardClick} data-id={item.Id}>
+                        
+                        <!-- Food Image -->
+                        <div class="slds-m-bottom_small" 
+                             style="height:150px; overflow:hidden; border-radius:0.5rem;">
+                            <lightning-formatted-rich-text 
+                                value={item.Menu_Item__r.Image__c}>
+                            </lightning-formatted-rich-text>
+                        </div>
+
+                        <!-- Info -->
+                        <div class="slds-text-body_regular slds-text-color_default">
+                            <p class="slds-text-heading_small slds-m-bottom_xx-small" 
+                               style="color:#d32f2f; font-weight:600;">
+                                {item.Menu_Item__r.Name}
+                            </p>
+                            <p class="slds-text-body_small">₹ {item.Price__c}</p>
+                        </div>
+                        <template  if:false={ShowAddtocartbutton}>
+                            <lightning-button label="Add to Cart" onclick={handleAddToCart}></lightning-button>
+                         </template>
+
+                        <!-- Quantity Controls -->
+                     <template if:true={ShowAddtocartbutton}>
+                        <div class="slds-grid slds-grid_align-spread slds-m-top_small">
+                            <lightning-button-icon 
+                                icon-name="utility:dash" 
+                                alternative-text="Remove"
+                                data-id={item.Id}
+                                onclick={handleDecrement}>
+                            </lightning-button-icon>
+
+                            <span>{item.quantity}</span>
+
+                            <lightning-button-icon 
+                                icon-name="utility:add" 
+                                alternative-text="Add"
+                                data-id={item.Id}
+                                onclick={handleIncrement}>
+                            </lightning-button-icon>
+                        </div>
+                     </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Pagination -->
+        <div class="slds-p-around_medium slds-grid slds-grid_align-center">
+            <lightning-button 
+                label="Previous" 
+                onclick={handlePrevPage} 
+                disabled={disablePrev}>
+            </lightning-button>
+
+            <span class="slds-m-horizontal_medium">
+                Page {currentPage} of {totalPages}
+            </span>
+
+            <lightning-button 
+                label="Next" 
+                onclick={handleNextPage} 
+                disabled={disableNext}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+
+  
+    <!-- Modal for Food Details -->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- Header -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close" 
+                            title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                    </button>
+                    <h2 class="slds-text-heading_medium">{selectedItem.Menu_Item__r.Name}</h2>
+                </header>
+
+                <!-- Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <!-- Food Image -->
+                    <div style="height:200px; overflow:hidden; border-radius:0.5rem;" class="slds-m-bottom_medium">
+                        <lightning-formatted-rich-text value={selectedItem.Menu_Item__r.Image__c}></lightning-formatted-rich-text>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="slds-text-body_regular slds-m-bottom_small">
+                        {selectedItem.Menu_Item__r.Description__c}
+                    </p>
+
+                    <!-- Price -->
+                    <p class="slds-text-heading_small slds-text-color_success">
+                        Price: ₹ {selectedItem.Price__c}
+                    </p>
+                </div>
+
+                <!-- Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    </template>
+     <template if:true={showCartPage}>
+        <c-cart-page 
+            cart-items={cart} 
+            onbacktomenu={handleBackFromCart}
+            onordercompleted={handleOrderCompleted}>
+        </c-cart-page>
+    </template>
+</template>

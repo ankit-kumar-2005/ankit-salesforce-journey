@@ -1,0 +1,90 @@
+<template>
+    <lightning-card title="Document Information">
+
+       
+        <template if:true={salaryType}>
+            <div class="slds-p-around_medium">
+
+             
+                <div class="slds-grid slds-align_absolute-center slds-p-bottom_small">
+                    <lightning-file-upload
+                        label="Upload AdharCard"
+                        name="AdharCard"
+                        accept=".pdf,.jpg,.png"
+                        record-id={recordId}
+                        onuploadfinished={handleUploadFinished}
+                        data-doc-type="AdharCard">
+                    </lightning-file-upload>
+                    <template if:true={adharUploaded}>
+                        <span class="slds-m-left_small" style="color:blue;font-size:22px;">✔</span>
+                    </template>
+                </div>
+
+                <div class="slds-grid slds-align_absolute-center slds-p-bottom_small">
+                    <lightning-file-upload
+                        label="Upload Salary Slip"
+                        name="SalarySlip"
+                        accept=".pdf,.jpg,.png"
+                        record-id={recordId}
+                        onuploadfinished={handleUploadFinished}
+                        data-doc-type="Salary Slip">
+                    </lightning-file-upload>
+                    <template if:true={salaryUploaded}>
+                        <span class="slds-m-left_small" style="color:blue;font-size:22px;">✔</span>
+                    </template>
+                </div>
+
+                
+                <div class="slds-grid slds-align_absolute-center slds-p-bottom_small">
+                    <lightning-file-upload
+                        label="Upload PanCard"
+                        name="PanCard"
+                        accept=".pdf,.jpg,.png"
+                        record-id={recordId}
+                        onuploadfinished={handleUploadFinished}
+                        data-doc-type="PanCard">
+                    </lightning-file-upload>
+                    <template if:true={panUploaded}>
+                        <span class="slds-m-left_small" style="color:blue;font-size:22px;">✔</span>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        
+        <template if:false={salaryType}>
+            <div class="slds-p-around_medium">
+
+           
+                <div class="slds-grid slds-align_absolute-center slds-p-bottom_small">
+                    <lightning-file-upload
+                        label="Upload AdharCard"
+                        name="AdharCard"
+                        accept=".pdf,.jpg,.png"
+                        record-id={recordId}
+                        onuploadfinished={handleUploadFinished}
+                        data-doc-type="AdharCard">
+                    </lightning-file-upload>
+                    <template if:true={adharUploaded}>
+                        <span class="slds-m-left_small" style="color:blue;font-size:22px;">✔</span>
+                    </template>
+                </div>
+
+              
+                <div class="slds-grid slds-align_absolute-center slds-p-bottom_small">
+                    <lightning-file-upload
+                        label="Upload PanCard"
+                        name="PanCard"
+                        accept=".pdf,.jpg,.png"
+                        record-id={recordId}
+                        onuploadfinished={handleUploadFinished}
+                        data-doc-type="PanCard">
+                    </lightning-file-upload>
+                    <template if:true={panUploaded}>
+                        <span class="slds-m-left_small" style="color:blue;font-size:22px;">✔</span>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>

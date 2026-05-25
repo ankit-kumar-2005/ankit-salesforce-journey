@@ -1,0 +1,26 @@
+<template>
+    <lightning-combobox
+        label="Select User"
+        name="Username"
+        value={selectedUser}
+        options={userList}
+        onchange={handleUserChange}> 
+    </lightning-combobox>
+
+<template if:true={userInfoToShow}>
+    <lightning-card  title="User Information"></lightning-card>"
+         <div class="slds-m-around_medium">
+            <p>Name: {userInfoToShow.Name}</p>
+            <p>Email: {userInfoToShow.Email}</p>
+            <p>Username: {userInfoToShow.Username}</p>
+            <p>Profile: {userInfoToShow.Profile.Name}</p>
+            <p>Active: {userInfoToShow.isActive}</p>
+        </div>
+    </lightning-card>
+</template>
+
+
+       
+
+    
+</template>

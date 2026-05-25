@@ -1,0 +1,89 @@
+<template>
+  <template if:false={selectedRestaurantId}>
+  
+    <lightning-card title="Restaurant Finder">
+
+  
+        <div class="slds-p-around_medium slds-grid slds-wrap slds-gutters slds-m-bottom_medium slds-radius_medium slds-bg-inverse-15">
+    
+            
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-input 
+                    type="search"
+                    label="Location"
+                    value={searchLocation}
+                    onchange={handleSearchLocationChange}>
+                </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-input
+                    type="search"
+                    label="Restaurant Name"
+                    value={searchRestaurant}
+                    onchange={handleSearchRestaurantChange}>
+                </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-combobox
+                    label="Cuisine type"
+                    name="cuisine"
+                    value={selectCuisine}
+                    options={cuisineOptions}
+                    onchange={handleSearchCuisineChange}>
+                </lightning-combobox>
+            </div>
+
+            <div class="slds-col slds-size_1-of-4 slds-p-top_large">
+                <lightning-input 
+                    type="toggle" 
+                    label="Veg only"
+                    checked={isVegOnly}
+                    onchange={handleVegOnlyChange}>
+                </lightning-input>
+            </div>
+        </div>
+
+        <!-- Restaurant Grid -->
+        <template if:true={paginatedRestaurants}>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <template for:each={paginatedRestaurants} for:item="restaurant">
+                    <div key={restaurant.Id} class="slds-col slds-size_1-of-4">
+                        <div class="slds-card slds-p-around_small slds-m-bottom_small restaurant-card"
+                             onclick={handleRestaurantClick} data-id={restaurant.Id}>
+                            <!-- Image -->
+                            <div class="slds-m-bottom_small" style="height:200px; overflow:hidden; border-radius:0.5rem;">
+                                <lightning-formatted-rich-text value={restaurant.Restaurant_Image__c}></lightning-formatted-rich-text>
+                            </div>
+                            <!-- Info -->
+                            <div class="slds-text-body_regular slds-text-color_default">
+                                <p class="slds-text-heading_small slds-m-bottom_xx-small" 
+                                   style="color:#d32f2f; font-weight:600;">
+                                    {restaurant.Name}
+                                </p>
+                                <p class="slds-text-body_small">{restaurant.Location__c}</p>
+                                <p class="slds-text-body_small">📞 {restaurant.Phone__c}</p>
+                                <p class="slds-text-body_small">⭐ {restaurant.Rating__c}</p>
+                                <p class="slds-text-body_small">{restaurant.Cuisine_Type__c}</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- Pagination -->
+        <div class="slds-p-around_medium slds-grid slds-grid_align-center">
+            <lightning-button label="Previous" onclick={handlePrevPage} disabled={disablePrev}></lightning-button>
+            <span class="slds-m-horizontal_medium">Page {currentPage} of {totalPages}</span>
+            <lightning-button label="Next" onclick={handleNextPage} disabled={disableNext}></lightning-button>
+        </div>
+    </lightning-card>
+</template>
+
+    <!-- Child MenuPage when a restaurant is selected -->
+   <template if:true={selectedRestaurantId}>
+        <c-menu-page restaurant-id={selectedRestaurantId} onnavigatehome={handleNavigateHome}></c-menu-page>
+    </template>
+</template>

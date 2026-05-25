@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Leave Information" icon-name="standard:user">
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="outer">
+                <div class="circle">
+                    <lightning-formatted-number 
+                        value={leaveBalance} 
+                        maximum-fraction-digits="1"
+                        minimum-fraction-digits="1">
+                    </lightning-formatted-number>
+                </div>
+                <div class="label">Leave Balance</div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

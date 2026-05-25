@@ -1,0 +1,122 @@
+<apex:page controller="ShowEmployeeInformationController" docType="html-5.0" showHeader="true" sidebar="false" lightningStylesheets="true">
+
+    <!-- CSS Styling -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+        }
+        .main-container {
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background: #f4f6f9;
+            font-size: 14px;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+
+    <div class="main-container">
+        <div class="content">
+            <apex:form >
+                <apex:pageMessages />
+
+                <!-- Error Handling -->
+                <apex:outputPanel rendered="{!showError}">
+                    <div style="color:red; font-weight:bold; margin:10px 0;">
+                        {!errorMessage}
+                    </div>
+                </apex:outputPanel>
+
+                <apex:outputPanel rendered="{!hasEmployeeRecord}">
+
+                    <!-- Highlight Panel -->
+                    <div style="display:flex; align-items:center; background:#f4f6f9; border:1px solid #ddd; padding:15px; border-radius:8px; margin-bottom:20px;">
+                        <!-- User Photo -->
+                        <div style="flex:0 0 100px; text-align:center;">
+                            <img src="{!userPhotoUrl}" alt="Profile Photo" style="border-radius:50%; width:80px; height:80px;" />
+                        </div>
+                        <!-- Names -->
+                        <table style="width:100%; border-collapse:collapse; text-align:left;">
+                            <tr>
+                                <!-- Column 1: Name -->
+                                <td style="padding:10px; vertical-align:middle;">
+                                    <span style="font-size:32px; font-weight:bold; color:#333;">
+                                        {!IF(ISBLANK(currentEmployee.Name),'NA',currentEmployee.Name)}
+                                    </span>
+                                </td>
+
+                                <!-- Column 2: Manager -->
+                                <td style="padding:10px; vertical-align:middle; color:#555;">
+                                    <b style="font-size:20px;">Manager:</b>
+                                    <span style="font-size:20px;"> {!IF(ISBLANK(managerName),'NA',managerName)}</span>
+                                </td>
+
+                                <!-- Column 3: Practice Head -->
+                                <td style="padding:10px; vertical-align:middle; color:#555;">
+                                    <b style="font-size:20px;">Practice Head:</b>
+                                    <span style="font-size:20px;"> {!IF(ISBLANK(practiceHeadName),'NA',practiceHeadName)}</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Sections -->
+                    <apex:pageBlock title="Employee Information" mode="maindetail">
+
+                        <!-- Personal Information -->
+                        <apex:pageBlockSection title="Personal Information" columns="2">
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Name),'NA',currentEmployee.Name)}" label="Employee Name"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Email_Address__c),'NA',currentEmployee.Email_Address__c)}" label="Email"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Primary_Contact_No__c),'NA',currentEmployee.Primary_Contact_No__c)}" label="Contact Number"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Aadhar_Number__c),'NA',currentEmployee.Aadhar_Number__c)}" label="Aadhar Card Number"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Pan_Card_Number__c),'NA',currentEmployee.Pan_Card_Number__c)}" label="Pan Card Number"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Emergency_Contact_Number__c),'NA',currentEmployee.Emergency_Contact_Number__c)}" label="Emergency Contact Number"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Father_Name__c),'NA',currentEmployee.Father_Name__c)}" label="Father Name"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Mother_Name__c),'NA',currentEmployee.Mother_Name__c)}" label="Mother Name"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Address__c),'NA',currentEmployee.Address__c)}" label="Permanent Address"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Current_Location__c),'NA',currentEmployee.Current_Location__c)}" label="Current Address"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Blood_Group__c),'NA',currentEmployee.Blood_Group__c)}" label="Blood Group"/>
+                        </apex:pageBlockSection>
+
+                        <!-- Work Information -->
+                        <apex:pageBlockSection title="Work Information" columns="2">
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Official_Email_Address__c),'NA',currentEmployee.Official_Email_Address__c)}" label="Official Email Address"/>
+                            <apex:outputText value="{!IF(ISBLANK(FormattedJoiningDate),'NA',FormattedJoiningDate)}" label="Joining Date"/>
+                            <apex:outputText value="{!IF(ISBLANK(FormattedConfirmationDate),'NA',FormattedConfirmationDate)}" label="Confirmation Date"/>
+                            <apex:outputText value="{!IF(ISBLANK(TotalExperienceFormatted),'NA',TotalExperienceFormatted)}" label="Total Experience"/>
+                            <apex:outputText value="{!IF(ISBLANK(TechmatrixExperienceFormatted),'NA',TechmatrixExperienceFormatted)}" label="Techmatrix Experience"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Department__c),'NA',currentEmployee.Department__c)}" label="Department"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Designation__c),'NA',currentEmployee.Designation__c)}" label="Designation"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Supervisor__c),'NA',currentEmployee.Supervisor__c)}" label="Supervisor Name"/>
+                        </apex:pageBlockSection>
+
+                        <!-- Bank Information -->
+                        <apex:pageBlockSection title="Bank Information" columns="2">
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Bank_Name__c),'NA',currentEmployee.Bank_Name__c)}" label="Bank Name"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.Bank_Account_Number__c),'NA',currentEmployee.Bank_Account_Number__c)}" label="Account Number"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.IFSC_Code__c),'NA',currentEmployee.IFSC_Code__c)}" label="IFSC Code"/>
+                            <apex:outputText value="{!IF(ISBLANK(currentEmployee.UAN_Number__c),'NA',currentEmployee.UAN_Number__c)}" label="UAN Number"/>
+                        </apex:pageBlockSection>
+
+                    </apex:pageBlock>
+                </apex:outputPanel>
+            </apex:form>
+        </div>
+
+        <!-- Footer -->
+        
+    </div>
+</apex:page>

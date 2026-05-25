@@ -1,0 +1,32 @@
+<apex:page standardController="Employee__c" >
+    <apex:form >
+        <apex:pageBlock title="Create Employee Record">
+            <apex:pageBlockSection columns="2">
+                <apex:inputField value="{!Employee__c.Name}"/>
+                <apex:inputField value="{!Employee__c.Email_Address__c}"/>
+                <apex:inputField value="{!Employee__c.Primary_Contact_No__c}"/>
+                <apex:inputField value="{!Employee__c.Gender__c}"/>
+                <apex:inputField value="{!Employee__c.Father_Name__c}"/>
+                <apex:inputField value="{!Employee__c.Pan_Card_Number__c}"/>
+                <apex:inputField value="{!Employee__c.Joining_Date__c}"/>
+                <apex:inputField value="{!Employee__c.Resigned__c}"/>
+                <apex:inputField value="{!Employee__c.Employment_Status__c }"/>
+                <apex:inputField value="{!Employee__c.Date_of_Birth__c}"/>
+                <apex:inputField value="{!Employee__c.Aadhar_Number__c}"/>
+                <apex:inputField value="{!Employee__c.Address__c }"/>
+                <apex:inputField value="{!Employee__c.Current_Location__c}"/>
+                <apex:inputField value="{!Employee__c.Work_Mode__c}"/>
+                <apex:inputField value="{!Employee__c.Work_Location__c}"/>
+                <apex:inputField value="{!Employee__c.Total_Experience_in_year__c}"/>
+                <apex:inputField value="{!Employee__c.Department__c}"/>
+                <apex:inputField value="{!Employee__c.Designation__c}"/>
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

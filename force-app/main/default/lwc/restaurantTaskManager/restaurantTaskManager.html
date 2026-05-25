@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Restaurant Task Manager">
+        <!-- Restaurant Selection -->
+        <lightning-combobox 
+            name="restaurantFilter" 
+            label="Select Restaurant"
+            value={selectedRestaurantId}
+            options={restaurantOptions}
+            onchange={handleRestaurantChange}>
+        </lightning-combobox>
+
+        <!-- Pie Chart -->
+        <div class="chart-container">
+            <canvas lwc:dom="manual" class="pieChart"></canvas>
+        </div>
+
+        <!-- Drag and Drop Columns -->
+        <div class="slds-grid slds-wrap slds-gutters">
+            <template for:each={statusColumns} for:item="column">
+                <div key={column.status} class="slds-col slds-size_1-of-3 status-column"
+                     ondrop={handleDrop} ondragover={allowDrop} data-status={column.status}>
+                    <h3>{column.status}</h3>
+                    <template for:each={column.tasks} for:item="task">
+                        <div key={task.Id} class="task-card" draggable="true" 
+                             ondragstart={handleDragStart} data-id={task.Id}>
+                            {task.Subject}
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

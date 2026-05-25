@@ -1,0 +1,62 @@
+<template>
+    <div class="card-wrapper">
+        <lightning-card title="Employee Time Tracking" icon-name="standard:user">
+            <div class="slds-card__body slds-card__body_inner">
+
+                <!-- Loading Spinner - Positioned at the top -->
+                <template if:true={isLoading}>
+                    <div class="slds-is-relative slds-m-bottom_medium">
+                        <lightning-spinner 
+                            alternative-text="Processing..." 
+                            size="medium"
+                            variant="brand">
+                        </lightning-spinner>
+                    </div>
+                </template>
+
+               
+
+                <!-- Button Container -->
+                <div class="button-container">
+                    <!-- In Time -->
+                    <button 
+                        class={inTimeButtonClass}
+                        onclick={handleInTimeClick}
+                        disabled={inTimeDisabled}>
+                        <div class="button-content">
+                            <lightning-icon icon-name="utility:login" size="large"></lightning-icon>
+                            <div class="button-text">IN TIME</div>
+                            <template if:true={hasInTime}>
+                                <div class="time-display">{currentInTime}</div>
+                            </template>
+                        </div>
+                    </button>
+
+                    <!-- Separator -->
+                    <div class="separator"></div>
+
+                    <!-- Out Time -->
+                    <button 
+                        class={outTimeButtonClass}
+                        onclick={handleOutTimeClick}
+                        disabled={outTimeDisabled}>
+                        <div class="button-content">
+                            <lightning-icon icon-name="utility:logout" size="large"></lightning-icon>
+                            <div class="button-text">OUT TIME</div>
+                            <template if:true={hasOutTime}>
+                                <div class="time-display">{currentOutTime}</div>
+                            </template>
+                        </div>
+                    </button>
+                </div>
+
+             
+                <template if:true={isLoading}>
+                    <div class="loading-overlay">
+                        <div class="loading-message">Processing...</div>
+                    </div>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

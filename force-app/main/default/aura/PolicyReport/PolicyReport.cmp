@@ -1,0 +1,115 @@
+<aura:component controller="PolicyReportController" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes" 
+                access="global">
+
+    <!-- Attributes -->
+    <aura:attribute name="policyReportData" type="List" default="[]" />
+    <aura:attribute name="isLoading" type="Boolean" default="true" />
+    <aura:attribute name="errorMessage" type="String" />
+
+    <!-- Events -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- Component Body -->
+    <div class="slds-card slds-p-around_none">
+        <!-- Header -->
+        <div class="slds-card__header slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning:icon iconName="standard:report" size="small" class="slds-icon-text-default"/>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small slds-truncate" title="Policy Acknowledgment Report">
+                            Policy Acknowledgment Report
+                        </span>
+                    </h2>
+                </div>
+            </header>
+            <div class="slds-no-flex">
+                <lightning:button variant="neutral" label="Refresh" iconName="utility:refresh" onclick="{!c.refreshData}" />
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="slds-card__body slds-card__body_inner">
+
+            <!-- Loading Spinner -->
+            <aura:if isTrue="{!v.isLoading}">
+                <div class="slds-spinner_container slds-is-relative slds-p-vertical_medium">
+                    <div role="status" class="slds-spinner slds-spinner_medium">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </aura:if>
+
+            <!-- Error Message -->
+            <aura:if isTrue="{!not(empty(v.errorMessage))}">
+                <div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <lightning:icon iconName="utility:error" size="x-small" class="slds-m-right_x-small"/>
+                    <span>{!v.errorMessage}</span>
+                </div>
+            </aura:if>
+
+            <!-- Report Table -->
+            <aura:if isTrue="{!not(v.isLoading)}">
+                <div class="slds-scrollable_x slds-p-around_small">
+                    <table class="slds-table slds-table_bordered slds-table_striped slds-table_col-bordered slds-table_fixed-layout">
+                        <thead>
+                            <tr class="slds-line-height_reset slds-text-title_caps">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Policy Name">Policy Name</div>
+                                </th>
+                                <th scope="col" class="slds-text-align_center">
+                                    <div class="slds-truncate" title="Acknowledged Count">Acknowledged</div>
+                                </th>
+                                <th scope="col" class="slds-text-align_center">
+                                    <div class="slds-truncate" title="Pending Count">Pending</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- No Data -->
+                            <aura:if isTrue="{!empty(v.policyReportData)}">
+                                <tr>
+                                    <td colspan="3" class="slds-text-align_center slds-p-around_large slds-text-color_weak">
+                                        <lightning:icon iconName="utility:info" size="small" class="slds-m-bottom_x-small"/>
+                                        <p>No policy data available</p>
+                                    </td>
+                                </tr>
+                            </aura:if>
+
+                            <!-- Data Rows -->
+                            <aura:iteration items="{!v.policyReportData}" var="policy">
+                                <tr class="slds-hint-parent">
+                                    <th scope="row" data-label="Policy Name">
+                                        <div class="slds-truncate" title="{!policy.policyName}">
+                                            <a href="{!'/lightning/r/Policy_And_Guideline__c/' + policy.policyId + '/view'}" 
+                                               target="_blank" 
+                                               class="slds-text-link_reset slds-text-link">
+                                                {!policy.policyName}
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <td class="slds-text-align_center" data-label="Acknowledged">
+                                        <span class="slds-badge slds-theme_success slds-badge_lightest">
+                                            {!policy.acknowledgedCount}
+                                        </span>
+                                    </td>
+                                    <td class="slds-text-align_center" data-label="Pending">
+                                        <span class="slds-badge slds-theme_warning slds-badge_lightest">
+                                            {!policy.pendingCount}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </div>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

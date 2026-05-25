@@ -1,0 +1,27 @@
+<template>
+        <template if:true={hasEvents}>
+         
+                 <h2 class="section-title">🎉 Today's Celebrations</h2>
+            
+                    <div class="carousel" style={carouselTransformStyle}>
+                        <template for:each={allEvents} for:item="emp">
+                            <div class="slide" key={emp.id}>
+                                <lightning-formatted-rich-text 
+                                    class="emp-img" 
+                                    value={emp.imageUrl}>
+                                </lightning-formatted-rich-text>
+                             <div class="event-type">{emp.eventLabel}</div>
+                                <div class="name">{emp.name}</div>
+                              
+                            </div>
+                        </template>
+                    </div>
+                
+            
+        </template>
+
+        <template if:false={hasEvents}>
+            <p class="slds-p-around_small">No celebrations today 🎈</p>
+        </template>
+
+</template>

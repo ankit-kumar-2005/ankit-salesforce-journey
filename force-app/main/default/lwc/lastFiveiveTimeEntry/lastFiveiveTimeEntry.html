@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Time Entry Records">
+        <template if:true={timeEntries}>
+            <lightning-datatable
+                hide-checkbox-column="true"
+                key-field="Id"
+                data={timeEntries}
+                columns={columns}
+            >
+            </lightning-datatable>
+        </template>
+        <template if:true={error}>
+            <p>Error retrieving time Entries: {error}</p>
+        </template>
+    </lightning-card>    
+</template>

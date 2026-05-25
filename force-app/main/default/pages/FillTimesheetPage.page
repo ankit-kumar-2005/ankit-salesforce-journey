@@ -1,0 +1,70 @@
+<apex:page standardController="TimeSheet__c"  extensions="FillTimesheetController"  lightningStylesheets="true" >
+    <style>
+        .timesheet-wrapper { padding: 12px; }
+        .timesheet-table { width:100%; border-collapse: collapse; }
+        .timesheet-table th, .timesheet-table td {
+            border: 1px solid #d8dde6;
+            padding: 8px;
+            vertical-align: top;
+        }
+        .timesheet-table th { background:#f7f9fb; text-align:left; }
+        .timesheet-table input[type="text"],
+        .timesheet-table input[type="number"],
+        .timesheet-table textarea,
+        .timesheet-table .uiInputDate { width:100%; box-sizing:border-box; }
+        .actions-column { width:120px; text-align:center; }
+        .btn-small { padding:6px 10px; border-radius:4px; border:1px solid #d8dde6; background:#fff; cursor:pointer; }
+        .btn-primary { background:#1589ee; color:#fff; border-color:#0f74d1; }
+        .page-actions { text-align:right; margin-bottom:10px; }
+        .slds-page-header { margin-bottom: 8px; }
+    </style>
+
+    <apex:form >
+        <apex:pageBlock title="Fill Timesheet" mode="edit">
+            <apex:pageMessages id="msgs"/>
+
+            <div class="timesheet-wrapper">
+                <apex:outputPanel id="tsTable"> 
+                    <table class="timesheet-table">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th style="width:140px">Spent Hours</th>
+                                <th style="width:170px">Date</th>
+                                <th>Description</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:variable var="rowIndex" value="{!0}"/>
+                            <apex:repeat value="{!timesheetList}" var="ts">
+                                <tr>
+                                    <td>
+                                        <apex:inputField value="{!ts.Project__c}" required="true"/>
+                                    </td>
+                                    <td>
+                                        <apex:inputField value="{!ts.Spent_Hours__c}" required="true" />
+                                    </td>
+                                    <td>
+                                        <apex:inputField value="{!ts.Date__c}" required="true"/>
+                                    </td>
+                                    <td>
+                                        <apex:inputField value="{!ts.Description__c}" />
+                                    </td>
+                                </tr>
+                                <apex:variable var="rowIndex" value="{!rowIndex+1}"/>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                </apex:outputPanel>
+            </div>
+
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Add Row" action="{!addRow}" rerender="tsTable,msgs" styleClass="btn-small"  />
+                <apex:commandButton value="Remove" action="{!removeRow}" rerender="tsTable,msgs" styleClass="btn-small" />
+                <apex:commandButton value="Submit" action="{!save}" rerender="msgs" styleClass="btn-small btn-primary" />
+                <apex:commandButton value="Cancel" action="{!cancel}" immediate="true" styleClass="btn-small" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

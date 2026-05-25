@@ -1,0 +1,45 @@
+<apex:page standardController="Account" recordSetVar="accounts" 
+           tabStyle="Account" sidebar="false" 
+           title="Update Accounts">
+
+    <apex:form >
+        <apex:pageBlock title="Update Account Records">
+
+            <!-- Display messages -->
+            <apex:pageMessages />
+
+            <!-- Action Buttons -->
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save Changes" action="{!save}" />
+                <apex:commandButton value="Cancel" action="{!cancel}" />
+            </apex:pageBlockButtons>
+
+            <!-- Editable Table -->
+            <apex:pageBlockTable value="{!accounts}" var="account">
+
+                <apex:column headerValue="Account Number">
+                    <apex:outputField value="{!account.AccountNumber}" />
+                </apex:column>
+
+                <apex:column headerValue="Account Name">
+                    <apex:outputField value="{!account.Name}" />
+                </apex:column>
+
+                <apex:column headerValue="Industry">
+                    <apex:inputField value="{!account.Industry}" />
+                </apex:column>
+
+                <apex:column headerValue="Rating">
+                    <apex:inputField value="{!account.Rating}" />
+                </apex:column>
+
+                <apex:column headerValue="Type">
+                    <apex:inputField value="{!account.Type}" />
+                </apex:column>
+
+            </apex:pageBlockTable>
+
+        </apex:pageBlock>
+    </apex:form>
+
+</apex:page>

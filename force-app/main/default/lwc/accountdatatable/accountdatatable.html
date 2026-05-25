@@ -1,0 +1,87 @@
+<template>
+    <template if:true={accountExist}>
+        <template if:true={showtable}>
+
+        <!-- Accounts Data Table -->
+        <lightning-card title="Accounts" icon-name="standard:account">
+            <template if:true={accountList}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={accountList}
+                    columns={columns}
+                    max-row-selection="1"
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+            </template>
+
+            <template if:true={error}>
+                <p class="slds-text-color_error slds-p-around_medium">
+                    {error}
+                </p>
+            </template>
+        </lightning-card>
+    </template>
+
+        <!-- Editable Form for Selected Account -->
+        <template if:true={showform}>
+            <template if:true={selectedAccountId}>
+                <lightning-card title="Edit Selected Account" icon-name="standard:account">
+                    <div class="slds-p-around_medium">
+                        <lightning-record-edit-form
+                            object-api-name="Account"
+                            record-id={selectedAccountId}
+                            onsuccess={handleSaveSuccess}
+                            onerror={handleSaveError}>
+
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="Name"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="Phone"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="Industry"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="Rating"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="Type"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="PersonEmail"></lightning-input-field>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-top_medium">
+                                <lightning-button
+                                    class="slds-m-right_small"
+                                    variant="neutral"
+                                    label="Cancel"
+                                    onclick={handleCancel}>
+                                </lightning-button>
+
+                                <lightning-button
+                                    variant="brand"
+                                    type="submit"
+                                    label="Save">
+                                </lightning-button>
+                            </div>
+                        </lightning-record-edit-form>
+                    </div>
+                </lightning-card>
+            </template>
+        </template>
+    </template>
+
+    <!-- Document Information Section -->
+    <template if:true={filldocument}>
+        <c-docinformation type={newAccntType} record-id={recordId}></c-docinformation>
+    </template>
+
+    <!-- Account Form if Account Doesn't Exist -->
+    <template if:false={accountExist}>
+        <c-account-form></c-account-form>
+    </template>
+</template>

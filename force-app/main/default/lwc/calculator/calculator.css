@@ -1,0 +1,175 @@
+/* calculator.css */
+.calculator {
+    background: #000;
+    border-radius: 20px;
+    max-width: 320px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 32px rgba(0,0,0,0.3);
+    user-select: none;
+    font-family: 'Segoe UI', sans-serif;
+    outline: none;
+}
+
+.calculator:focus-within {
+    box-shadow: 0 0 32px rgba(0,0,0,0.3), 0 0 0 3px rgba(255, 149, 0, 0.3);
+}
+
+.display {
+    text-align: right;
+    color: #fff;
+    margin-bottom: 20px;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input {
+    font-size: 28px;
+    min-height: 40px;
+    color: #bbb;
+    word-break: break-all;
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+.result {
+    font-size: 40px;
+    font-weight: bold;
+    min-height: 50px;
+    word-break: break-all;
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+button {
+    width: 64px;
+    height: 64px;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    background: #333;
+    transition: background 0.2s, transform 0.1s;
+    outline: none;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    background: #555;
+    transform: scale(0.95);
+}
+
+button:focus {
+    box-shadow: 0 0 0 2px rgba(255, 149, 0, 0.5);
+}
+
+.number-btn {
+    background: #1c1c1c;
+}
+
+.number-btn:hover {
+    background: #2a2a2a;
+}
+
+.operator-btn {
+    background: orange;
+    color: #fff;
+}
+
+.operator-btn:hover {
+    background: #ff8c00;
+}
+
+.function-btn {
+    background: #a5a5a5;
+    color: #000;
+    font-weight: bold;
+}
+
+.function-btn:hover {
+    background: #b5b5b5;
+}
+
+.equals-btn {
+    background: orange;
+    color: #fff;
+    font-weight: bold;
+}
+
+.equals-btn:hover {
+    background: #ff8c00;
+}
+
+.zero {
+    grid-column: span 2;
+    width: calc(100% + 12px);
+    border-radius: 50px;
+}
+
+.dummy-btn {
+     width: 64px;
+    height: 64px;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    background: #333;
+    transition: background 0.2s, transform 0.1s;
+    outline: none;
+}
+
+/* Responsive font sizes for large numbers */
+.input.small-font {
+    font-size: 20px;
+}
+
+.input.extra-small-font {
+    font-size: 16px;
+}
+
+.result.small-font {
+    font-size: 32px;
+}
+
+.result.extra-small-font {
+    font-size: 24px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 400px) {
+    .calculator {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    button {
+        width: 56px;
+        height: 56px;
+        font-size: 20px;
+    }
+    
+    .zero {
+        width: calc(100% + 12px);
+    }
+    
+    .input {
+        font-size: 24px;
+    }
+    
+    .result {
+        font-size: 32px;
+    }
+}

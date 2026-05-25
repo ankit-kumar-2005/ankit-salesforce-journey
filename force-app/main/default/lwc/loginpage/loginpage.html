@@ -1,0 +1,59 @@
+<template>
+    <template if:false={showAccountspage}>
+    <template if:false={showValidatepage}>
+    <lightning-card title="Login Page" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <div class="slds-col slds-size_1-of-2">
+          
+            <lightning-input type="phone" label="User Mobile No" value={mobileNo} onchange={handlePhoneChange}  required="true">
+
+            </lightning-input>
+            </div>
+            <div class="slds-m-top_small">
+             <lightning-button label="Next" variant="brand" onclick={handleLogin}></lightning-button>
+            </div>
+            </div> 
+        </lightning-card>
+        </template>
+
+        <template if:true={showValidatepage}>
+            <lightning-card title="Validate Page" icon-name="standard:account">
+                <div class="slds-m-around_medium">
+                    <div class="slds-col slds-size_1-of-2">
+                        <p>Dear User Your OTP is:{ otp }</p>
+                        <p>The reset button will appear after 30 seconds, and the user will have only 3 attempts.</p>
+                       
+
+                        <lightning-input type="text" label="Enter OTP" value={userotp} onchange={handleOtpChange}  required="true">
+
+                        </lightning-input>
+                      
+                    </div>
+                    <div class="slds-m-top_small">
+                          <div class="slds-col slds-size_1-of-2">
+                             <p>This is Your {Count} attempt</p>
+                           <!---Reset otp unable after 30 second-->
+                            <lightning-button label="Reset OTP" variant="brand" onclick={handleResetOtp} disabled={isButtonDisabled}>
+    
+                            </lightning-button>
+
+                          </div>
+                          <div class="slds-col slds-size_1-of-2 slds-p-top_large">
+                              <lightning-button label="Validate" variant="brand" onclick={handleValidate} >
+    
+                            </lightning-button>
+                          </div>
+                         
+
+
+                    </div>
+                </div>
+            </lightning-card>
+        </template>
+        </template>
+        <template if:true={showAccountspage}>
+            <c-accountdatatable mobile-no={mobileNo}></c-accountdatatable>
+
+        </template>
+
+</template>

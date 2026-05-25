@@ -1,0 +1,26 @@
+<template>
+    <template if:false={filldocument}>
+    <lightning-card title="Create New Account" icon-name="standard:account">
+        <lightning-record-edit-form
+            object-api-name="Account"
+            onsuccess={handleSuccess}
+            onerror={handleError}>
+            
+            <div class="slds-p-around_medium">
+                <lightning-input-field field-name="Name"></lightning-input-field>
+                <lightning-input-field field-name="Phone"></lightning-input-field>
+                <lightning-input-field field-name="Industry"></lightning-input-field>
+                <lightning-input-field field-name="Rating"></lightning-input-field>
+                <lightning-input-field field-name="Type"></lightning-input-field>
+            </div>
+
+            <footer class="slds-card__footer">
+                <lightning-button type="submit" label="Create Account" variant="brand"></lightning-button>
+            </footer>
+        </lightning-record-edit-form>
+    </lightning-card>
+    </template>
+     <template if:true={filldocument}>
+        <c-docinformation type={newAccntType} record-id={recordId}></c-docinformation>
+    </template>
+</template>

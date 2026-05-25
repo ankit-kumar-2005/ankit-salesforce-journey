@@ -1,0 +1,78 @@
+<apex:page standardController="Employee_Salary__c"
+           extensions="PaySlipEmailController"
+           showHeader="false"
+           sidebar="false">
+   
+    <apex:slds />
+   
+    <div class="slds-scope">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <h1><span class="slds-page-header__title slds-truncate">Send Payslip</span></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="slds-card" style="margin-top: 1rem;">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span>Employee Payslip Email</span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+           
+            <div class="slds-card__body slds-card__body_inner">
+                <apex:form >
+                    <apex:pageMessages />
+                   
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">
+                                    <strong>Employee Name:</strong>
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <apex:outputText value="{!emp.Name}" styleClass="slds-input" />
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">
+                                    <strong>Employee Email:</strong>
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <apex:outputText value="{!emp.Email_Address__c}" styleClass="slds-input" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="slds-form-element" style="margin-top: 1.5rem;">
+                        <div class="slds-button-group">
+                            <apex:commandButton value="Send Payslip"
+                                              action="{!sendPayslip}"
+                                              styleClass="slds-button slds-button_brand"
+                                              rendered="{!NOT(ISBLANK(emp.Email_Address__c))}"/>
+                           
+                            <apex:commandButton value="Back to Record"
+                                              action="{!backToRecord}"
+                                              styleClass="slds-button slds-button_neutral"/>
+                        </div>
+                    </div>
+                </apex:form>
+            </div>
+        </div>
+    </div>
+</apex:page>

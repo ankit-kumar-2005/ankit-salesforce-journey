@@ -1,0 +1,45 @@
+<apex:page standardController="Account" renderAs="pdf">
+    <h1 style="text-align:center;">Account Details</h1>
+    <hr/>
+    <table border="1" cellpadding="5" cellspacing="0" style="width:100%;">
+        <tr>
+            <th>Account Name</th>
+            <td>{!Account.Name}</td>
+        </tr>
+        <tr>
+            <th>Industry</th>
+            <td>{!Account.Industry}</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>{!Account.Phone}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{!Account.Type}</td>
+        </tr>
+        <tr>
+            <th>Billing Address</th>
+            <td>{!Account.BillingStreet}, {!Account.BillingCity}, {!Account.BillingState}, {!Account.BillingCountry}</td>
+        </tr>
+        <tr>
+            <th>Owner</th>
+            <td>{!Account.Owner.Name}</td>
+        </tr>
+        <tr>
+            <th>Account Number</th>
+            <td>{!Account.AccountNumber}</td>
+        </tr>
+        <tr>
+            <th>Rating</th>
+            <td>{!Account.Rating}</td>
+        </tr>
+        <tr>
+            <th>Website</th>
+            <td>{!Account.Website}</td>
+        </tr>
+    </table>
+    <p style="text-align:center; margin-top:20px;">
+        Generated on: {!NOW()}
+    </p>
+</apex:page>

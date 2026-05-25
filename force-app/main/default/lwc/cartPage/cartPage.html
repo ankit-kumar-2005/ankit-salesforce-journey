@@ -1,0 +1,84 @@
+<template>
+    <lightning-card title="Your Cart">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Food Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={cartItemsWithTotal} for:item="item">
+                    <tr key={item.Id}>
+                        <td>
+                    <div class="slds-m-bottom_small" 
+                  style="height:200px; width:200px; overflow:hidden; border-radius:0.5rem;">
+
+    <lightning-formatted-rich-text 
+        value={item.Menu_Item__r.Image__c}
+        style="height:100%; width:100%; object-fit:cover; border-radius:0.5rem;">
+    </lightning-formatted-rich-text>
+
+</div>
+                        </td>
+                        <td>{item.Menu_Item__r.Name}</td>
+                        <td>₹ {item.Price__c}</td>
+                        <td>{item.quantity}</td>
+                        <td>₹ {item.total}</td>
+                        <td>
+                            <lightning-button 
+                                label="Remove" 
+                                data-id={item.Id} 
+                                onclick={removeItem} 
+                                variant="destructive" 
+                                size="small">
+                            </lightning-button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
+        <div class="slds-m-top_medium">
+            <b>Grand Total: ₹ {grandTotal}</b>
+        </div>
+
+        <div class="slds-m-top_medium slds-grid slds-grid_align-end slds-gap_small">
+            <lightning-button label="Back" onclick={handleBack}></lightning-button>
+            <lightning-button label="Confirm and Pay" variant="brand" onclick={handlePayment}></lightning-button>
+        </div>
+    </lightning-card>
+
+    <!-- Payment Modal at top level -->
+    <template if:true={isPaymentOpen}>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Payment Details</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-combobox
+                        label="Payment Type"
+                        required="true"
+                        options={paymentOptions}
+                        value={paymentType}
+                        onchange={handlePaymentTypeChange}>
+                    </lightning-combobox>
+
+                    <lightning-input label="Customer Name" required="true" value={customerName} onchange={handleCustomerNameChange}></lightning-input>
+                    <lightning-input label="Email" required="true" value={customerEmail} onchange={handleCustomerEmailChange}></lightning-input>
+                    <lightning-input label="Phone" required="true" value={customerPhone} onchange={handleCustomerPhoneChange}></lightning-input>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closePayment}></lightning-button>
+                    <lightning-button label="Submit" variant="brand" onclick={submitPayment}></lightning-button>
+                </footer>
+            </div>
+        </section>
+    </template>
+</template>

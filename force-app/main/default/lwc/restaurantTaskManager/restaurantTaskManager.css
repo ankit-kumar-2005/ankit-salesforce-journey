@@ -1,0 +1,20 @@
+.chart-container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.status-column {
+    border: 1px solid #d8dde6;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    min-height: 200px;
+}
+
+.task-card {
+    background: #f3f6f9;
+    margin: 0.25rem 0;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: grab;
+}

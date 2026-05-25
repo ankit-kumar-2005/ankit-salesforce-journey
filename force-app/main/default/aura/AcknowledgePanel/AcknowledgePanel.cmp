@@ -1,0 +1,76 @@
+<aura:component controller="PolicyAcknowledgmentController" implements="flexipage:availableForRecordHome,force:hasRecordId">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="policyRecord" type="PolicyGuideline__c" />
+    <aura:attribute name="isAcknowledged" type="Boolean" default="false" />
+    <aura:attribute name="isLoading" type="Boolean" default="true" />
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="messageType" type="String" />
+    <aura:attribute name="acknowledgmentDate" type="String" />
+   
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+   
+    <div class="slds-card">
+       <!-- <div class="slds-card__header slds-grid">
+            <div class="slds-media slds-media_center">
+                <div class="slds-media__figure">
+                    <lightning:icon iconName="standard:article" size="medium" />
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-text-heading_small">Policy Acknowledgment</h2>
+                </div>
+            </div>
+        </div>-->
+       
+        <div class="slds-card__body slds-card__body_inner">
+           
+            <!-- Loading Spinner -->
+            <div class="{!v.isLoading ? 'slds-spinner_container' : 'slds-hide'}">
+                <div class="slds-spinner slds-spinner_medium">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+           
+            <!-- Main Content -->
+            <div class="{!v.isLoading ? 'slds-hide' : ''}">
+               
+                <!-- Message -->
+                <div class="{!empty(v.message) ? 'slds-hide' : 'slds-notify slds-notify_alert slds-m-bottom_medium ' + (v.messageType == 'error' ? 'slds-theme_error' : 'slds-theme_success')}">
+                    <lightning:icon iconName="{!v.messageType == 'error' ? 'utility:error' : 'utility:success'}" size="x-small" variant="inverse" class="slds-m-right_x-small"/>
+                    {!v.message}
+                </div>
+               
+                <!-- Policy Info and Button -->
+                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                    <div class="slds-col slds-size_8-of-12">
+                        <div class="slds-media slds-media_small">
+                            <div class="slds-media__figure">
+                                <lightning:icon iconName="standard:article" size="Medium" class = "slds-m-right_x-small" />
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-body_small slds-text-color_weak">Policy and Guideline</p>
+                                <h3 class="slds-text-heading_medium"><b>{!v.policyRecord.Name}</b></h3>
+                                <div class="{!v.isAcknowledged ? '' : 'slds-hide'}">
+                                    <!--<p class="slds-text-body_small slds-text-color_success slds-m-top_x-small">
+                                        <lightning:icon iconName="utility:check" size="xx-small" class="slds-m-right_x-small"/>
+                                        Acknowledged on: {!v.acknowledgmentDate}
+                                    </p>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="slds-col slds-size_4-of-12 slds-text-align_right">
+                        <lightning:button
+                                          label="{!v.isAcknowledged ? 'Acknowledged' : 'Acknowledge'}"
+                                          variant="{!v.isAcknowledged ? 'success' : 'brand'}"
+                                          disabled="{!v.isAcknowledged}"
+                                          onclick="{!c.handleAcknowledge}"
+                                          iconName="{!v.isAcknowledged ? 'utility:check' : ''}"
+                                          iconPosition="left" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

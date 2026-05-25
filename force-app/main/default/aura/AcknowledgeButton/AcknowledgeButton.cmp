@@ -1,0 +1,14 @@
+<aura:component controller="AcknowledgeButtonController" 
+                implements="force:hasRecordId,flexipage:availableForRecordHome" 
+                access="global">
+    <aura:attribute name="isDisabled" type="Boolean" default="false"/>
+
+    <lightning:card title="Policy Acknowledgment">
+        <div style="display: flex; justify-content: flex-end; padding: 10px;">
+            <lightning:button label="Acknowledge" 
+                              onclick="{!c.handleClick}" 
+                              disabled="{!v.isDisabled}" 
+                              variant="brand"/>
+        </div>
+    </lightning:card>
+</aura:component>
